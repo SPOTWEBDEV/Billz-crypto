@@ -1,9 +1,7 @@
 <?php include('./server/connection.php') ?>
 <!DOCTYPE html>
 <html>
-
-<!-- Mirrored from realprofitstocktrade.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 20:48:35 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
@@ -54,11 +52,18 @@
 	<script type="text/javascript">
 		var _smartsupp = _smartsupp || {};
 		_smartsupp.key = '2130cfe70019644752879c07a1310fb0c60619e3';
-		window.smartsupp || (function (d) {
-			var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
-			s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
-			c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
-			c.src = '../www.smartsuppchat.com/loaderd41d.js?'; s.parentNode.insertBefore(c, s);
+		window.smartsupp || (function(d) {
+			var s, c, o = smartsupp = function() {
+				o._.push(arguments)
+			};
+			o._ = [];
+			s = d.getElementsByTagName('script')[0];
+			c = d.createElement('script');
+			c.type = 'text/javascript';
+			c.charset = 'utf-8';
+			c.async = true;
+			c.src = '../www.smartsuppchat.com/loaderd41d.js?';
+			s.parentNode.insertBefore(c, s);
 		})(document);
 	</script>
 	<noscript> Powered by <a href=%e2%80%9chttps_/www.smartsupp.html target=“_blank”>Smartsupp</a></noscript>
@@ -110,35 +115,34 @@
 					class="blue-text">Ticker Tape</span></a> by TradingView</div>
 		<script type="text/javascript" src="../s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
 			async>
-				{
-					"symbols": [
-						{
-							"title": "S&P 500",
-							"proName": "OANDA:SPX500USD"
-						},
-						{
-							"title": "Nasdaq 100",
-							"proName": "OANDA:NAS100USD"
-						},
-						{
-							"title": "EUR/USD",
-							"proName": "FX_IDC:EURUSD"
-						},
-						{
-							"title": "BTC/USD",
-							"proName": "BITSTAMP:BTCUSD"
-						},
-						{
-							"title": "ETH/USD",
-							"proName": "BITSTAMP:ETHUSD"
-						}
-					],
-						"colorTheme": "dark",
-							"isTransparent": true,
-								"displayMode": "adaptive",
-									"locale": "en"
-				}
-			</script>
+			{
+				"symbols": [{
+						"title": "S&P 500",
+						"proName": "OANDA:SPX500USD"
+					},
+					{
+						"title": "Nasdaq 100",
+						"proName": "OANDA:NAS100USD"
+					},
+					{
+						"title": "EUR/USD",
+						"proName": "FX_IDC:EURUSD"
+					},
+					{
+						"title": "BTC/USD",
+						"proName": "BITSTAMP:BTCUSD"
+					},
+					{
+						"title": "ETH/USD",
+						"proName": "BITSTAMP:ETHUSD"
+					}
+				],
+				"colorTheme": "dark",
+				"isTransparent": true,
+				"displayMode": "adaptive",
+				"locale": "en"
+			}
+		</script>
 	</div>
 	<!-- TradingView Widget END -->
 
@@ -218,16 +222,16 @@
 					target="_blank"><span class="blue-text">Cryptocurrency Markets</span></a> by TradingView</div>
 			<script type="text/javascript" src="s3.tradingview.com/external-embedding/embed-widget-screener.js"
 				async>
-					{
-						"height": 490,
-							"defaultColumn": "overview",
-								"screener_type": "crypto_mkt",
-									"displayCurrency": "USD",
-										"colorTheme": "dark",
-											"locale": "en",
-												"isTransparent": true
-					}
-				</script>
+				{
+					"height": 490,
+					"defaultColumn": "overview",
+					"screener_type": "crypto_mkt",
+					"displayCurrency": "USD",
+					"colorTheme": "dark",
+					"locale": "en",
+					"isTransparent": true
+				}
+			</script>
 		</div>
 		<!-- TradingView Widget END -->
 	</center>
@@ -434,7 +438,7 @@
 					<p class="overview">
 						<b>Carlene</b>
 					</p>
-					<p>	ACCOUNT MANAGER</p>
+					<p> ACCOUNT MANAGER</p>
 				</div>
 				<div class="item carousel-item">
 					<div class="img-box" style="width: 300px; height: 300px; margin-bottom: 24px;">
@@ -556,8 +560,7 @@
 						class="blue-text">Quotes</span></a> by TradingView</div>
 			<script type="text/javascript" src="../s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
 				{
-					"symbols": [
-						{
+					"symbols": [{
 							"title": "S&P 500",
 							"proName": "OANDA:SPX500USD"
 						},
@@ -578,9 +581,9 @@
 							"proName": "BITSTAMP:ETHUSD"
 						}
 					],
-						"colorTheme": "dark",
-							"isTransparent": true,
-								"locale": "en"
+					"colorTheme": "dark",
+					"isTransparent": true,
+					"locale": "en"
 				}
 			</script>
 		</div>
@@ -930,7 +933,8 @@
 	</div>
 
 	<!-- scripts -->
-	<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="particles.js-master/particles.js"></script>
+	<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+	<script src="particles.js-master/particles.js"></script>
 	<script src="particles.js-master/demo/js/app.js"></script>
 	<script type="text/javascript" src="alert/js/jquery.fake-notification.min.js"></script>
 	<!-- stats.js -->
@@ -944,7 +948,7 @@
 		stats.domElement.style.top = '0px';
 		document.body.appendChild(stats.domElement);
 		count_particles = document.querySelector('.js-count-particles');
-		update = function () {
+		update = function() {
 			stats.begin();
 			stats.end();
 			if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
@@ -955,14 +959,16 @@
 		requestAnimationFrame(update);
 	</script>
 	<script>
-		$(document).ready(function () {
+		$(document).ready(function() {
 			$('#notification-1').Notification({
 				// Notification varibles
 				Varible1: ["Dirk", "Johnny", "Watkin ", "Alejandro", "Vina", "Tony", "Ahmed", "Jackson", "Noah", "Aiden", "Darren", "Isabella", "Aria", "John", "Greyson", "Peter", "Mohammed", "William",
-					"Lucas", "Amelia", "Mason", "Mathew", "Richard", "Chris", "Mia", "Oliver"],
+					"Lucas", "Amelia", "Mason", "Mathew", "Richard", "Chris", "Mia", "Oliver"
+				],
 				Varible2: ["USA", "UAE", "ITALY", "FLORIDA", "MEXICO", "INDIA", "CHINA", "CAMBODIA", "UNITED KINGDOM", "GERMANY", "AUSTRALIA", "BANGLADESH", "SWEDEN", "PAKISTAN", "MALDIVES", "SEYCHELLES",
 					"BOLIVIA",
-					"SOUTH AFRICA", "ZAMBIA", "ZIMBABWE", "LEBANESE", "SAUDI ARABIA", "CHILE", "PEUTO RICO"],
+					"SOUTH AFRICA", "ZAMBIA", "ZIMBABWE", "LEBANESE", "SAUDI ARABIA", "CHILE", "PEUTO RICO"
+				],
 
 				Amount: [1000, 2500, 5550, 6660, 4454, 3833, 6969],
 				Content: '[Varible1] from [Varible2] has just Earned <b>$[Amount]</b>.',
@@ -990,7 +996,7 @@
 				Link: [false, 'index.html', '_blank']
 
 			});
-		}); 				
+		});
 	</script>
 	<script type="text/javascript" src="js/j.js"></script>
 
@@ -1080,7 +1086,9 @@
 						}
 					})
 					if (res) return res
-				} catch (e) { throw e }
+				} catch (e) {
+					throw e
+				}
 			}
 		}
 		getSupport().then((support) => {
@@ -1103,9 +1111,10 @@
 		})
 	</script>
 
-	
+
 </body>
 
 
 <!-- Mirrored from realprofitstocktrade.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 20:49:04 GMT -->
+
 </html>
