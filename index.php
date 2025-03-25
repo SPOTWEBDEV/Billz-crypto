@@ -93,7 +93,7 @@
 		background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
 	<div style="background: #232733;">
 		<div class="_in_content_" style="padding: 20px 15px;">
-			<a href="index.html">
+			<a href="index.php">
 				<div class="logo" style="display: flex; align-items: center; gap: 4px;">
 					<img class="logo hidden-xs" src="image/logo.png">&nbsp;
 					<div>
@@ -102,8 +102,9 @@
 					</div>
 				</div>
 			</a>
-			<a class="__tL" href="<?php echo $domain ?>register/">REGISTER</a>
-			<a class="__tL" href="<?php echo $domain ?>login/">LOGIN</a>
+			<a class="__tL" href="<?php echo $domain ?>register">REGISTER</a>
+			<a class="__tL" href="<?php echo $domain ?>login">LOGIN</a>
+		
 
 		</div>
 	</div>

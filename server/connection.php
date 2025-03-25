@@ -35,7 +35,7 @@ if ($request == 'https') {
     define("DATABASE", "tifkvkth_crypto");
 }
 elseif ($request == 'http') {
-    $domain = "http://localhost/crypto/";
+    $domain = "http://localhost/Billz-crypto/";
     define("USER", "root");
     define("PASSWORD", "");
     define("DATABASE", "billz-crypto");

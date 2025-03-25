@@ -134,6 +134,7 @@
 <?php
 
 // Check if form is submitted
+// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Retrieve form data
@@ -145,16 +146,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate form data
     if (empty($email) || empty($first_name) || empty($last_name) || empty($password) || empty($confirm_password)) {
-        echo "All fields are required!";
+        echo '<script>
+        Swal.fire({
+            title: "Error!",
+            text: "All fields are required!",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+      </script>';
         exit;
     }
 
     if ($password !== $confirm_password) {
-        echo "Passwords do not match!";
+        echo '<script>
+        Swal.fire({
+            title: "Error!",
+            text: "Passwords do not match!",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+      </script>';
         exit;
     }
-
-  
 
     // Prepare SQL query with placeholders to prevent SQL injection
     $stmt = $connection->prepare("INSERT INTO users (email, user, name, password) VALUES (?, ?, ?, ?)");
@@ -173,10 +186,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
       </script>';
     } else {
-        echo "Error: " . $stmt->error;
+        echo '<script>
+        Swal.fire({
+            title: "Error!",
+            text: "Error: ' . $stmt->error . '",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+      </script>';
     }
-
 }
+
 ?>
 
 

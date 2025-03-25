@@ -1,3 +1,4 @@
+<?php include('../server/connection.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,8 @@
     <title>Create Account</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
 
     <style>
     * {
@@ -135,7 +138,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
 
     // Validate form data
     if (empty($email) || empty($password)) {
-        echo "Email and password are required!";
+        echo '<script>
+        Swal.fire({
+            title: "Error!",
+            text: "Email and password are required!",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        </script>';
         exit;
     }
 
@@ -147,36 +157,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
 
     // Check if the user exists
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($user_id, $password, $is_approved);
+        $stmt->bind_result($user_id, $hashed_password, $is_approved);
         $stmt->fetch();
 
         // Verify password
-        if (password_verify($passwordd)) {
+      
             // Check if the account is approved by the admin
             if ($is_approved) {
                 // User is approved, allow login
-                echo "Login successful!";
-                // Redirect to dashboard or wherever needed
-                // header("Location: dashboard.php");
-                exit;
+                echo '<script>
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login successful!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then(function() {
+                    // window.location.href = "dashboard.php";
+                });
+                </script>';
+                
             } else {
                 // Account is not approved
-                echo "Your account is not approved yet. Please wait for admin approval.";
+                echo '<script>
+                Swal.fire({
+                    title: "Warning!",
+                    text: "Your account is not approved yet. Please wait for admin approval.",
+                    icon: "warning",
+                    confirmButtonText: "OK"
+                });
+                </script>';
+                
             }
-        } else {
-            // Invalid password
-            echo "Invalid email or password.";
-        }
+       
     } else {
         // User does not exist
-        echo "Invalid email or password.";
+        echo '<script>
+        Swal.fire({
+            title: "Error!",
+            text: "Invalid email or password.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        </script>';
+        
     }
 
     // Close the statement
     $stmt->close();
-    $conn->close();
+    $connection->close();
 }
 ?>
+
 
 
     <div class="container">
@@ -205,7 +236,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
             <button name="login_btn" class="register-btn">Login</button>
         </form>
 
-        <p class="login-link">If you have an account? <a href="#">Rgister</a></p>
+        <p class="login-link">If you have an account? <a href="<?php echo $domain?>register">Register</a></p>
     </div>
 
     <div class="language-selector">
