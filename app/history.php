@@ -30,7 +30,7 @@ function formatNumber($number, $decimals = 2) {
 
 <!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
+<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
 
 <head>
     <!-- Meta Data -->
