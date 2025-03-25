@@ -164,6 +164,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
       
             // Check if the account is approved by the admin
             if ($is_approved) {
+                
+
+                $_SESSION['logged_in'] = $user_id;
+
+
                 // User is approved, allow login
                 echo '<script>
                 Swal.fire({
@@ -172,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
                     icon: "success",
                     confirmButtonText: "OK"
                 }).then(function() {
-                    // window.location.href = "dashboard.php";
+                    window.location.href = "../app/";
                 });
                 </script>';
                 
