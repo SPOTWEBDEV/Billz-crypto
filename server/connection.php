@@ -29,16 +29,16 @@ define("HOST", "localhost");
 
 // Set configurations based on protocol
 if ($request == 'https') {
-    $domain = "http://localhost/PrimeFx.com";
+    $domain = "https://fusionsassets.com/";
     define("USER", "tifkvkth_crypto");
     define("PASSWORD", "tifkvkth_crypto");
     define("DATABASE", "tifkvkth_crypto");
 }
 elseif ($request == 'http') {
-    $domain = "http://localhost/PrimeFx/";
+    $domain = "http://localhost/crypto/";
     define("USER", "root");
     define("PASSWORD", "");
-    define("DATABASE", "jay");
+    define("DATABASE", "billz-crypto");
 }
 
 // // Database connection
@@ -48,13 +48,20 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// // Site configurations
+$sitename = "Fusions Assets";
+
+
+// email config 
+$siteemail = "support@fusionsassets.com";
+$emailpassword  = "support@fusionsassets.com";
+$host = 'mail.fusionsassets.com';
+$sitephone  = "+44 776 0957 798";
+$siteaddress  = "weston newyork";
 
 
 
-
-
-
-
+$apiKey = "1312f57d-3307-4c2b-bd94-9850caf54b40";
 
 
 
