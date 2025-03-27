@@ -29,7 +29,7 @@ define("HOST", "localhost");
 
 // Set configurations based on protocol
 if ($request == 'https') {
-    $domain = "https://fusionsassets.com/";
+    $domain = "https://primefxsphere.com/";
     define("USER", "tifkvkth_crypto");
     define("PASSWORD", "tifkvkth_crypto");
     define("DATABASE", "tifkvkth_crypto");
