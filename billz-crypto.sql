@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2025 at 11:48 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Mar 27, 2025 at 02:38 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jay`
+-- Database: `billz-crypto`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
   `email` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -58,7 +58,7 @@ CREATE TABLE `deposits` (
   `gift_card_code` varchar(900) NOT NULL,
   `gift_card_image` varchar(900) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `deposits`
@@ -89,7 +89,7 @@ CREATE TABLE `expert` (
   `win_rates` varchar(255) NOT NULL,
   `trades` varchar(255) NOT NULL,
   `ratio` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `expert`
@@ -119,16 +119,17 @@ CREATE TABLE `investments` (
   `date_to_mature` varchar(100) NOT NULL,
   `ends_on` varchar(100) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `investments`
 --
 
 INSERT INTO `investments` (`id`, `user_id`, `plan`, `amount`, `email`, `profit`, `number_of_day`, `total`, `date_invested`, `date_to_mature`, `ends_on`, `status`) VALUES
-(1, 6, 'Basic Plan', '100', 'spotwebdev.com@gmail.com', '5.20', 0, '26', '2025-01-25 07:38:12', '2025-01-26 07:38:12', '2025-01-30 07:38:12', 0),
-(2, 7, 'Starter Plan', '100', 'festus@gmail.com', '10.00', 0, '50', '2025-03-24 22:11:40', '2025-03-25 22:11:40', '2025-03-29 22:11:40', 0),
-(3, 7, 'Starter Plan', '60', 'festus@gmail.com', '6.00', 0, '30', '2025-03-24 22:13:30', '2025-03-25 22:13:30', '2025-03-29 22:13:30', 0);
+(1, 6, 'Basic Plan', '100', 'spotwebdev.com@gmail.com', 5.20, 0, '26', '2025-01-25 07:38:12', '2025-01-26 07:38:12', '2025-01-30 07:38:12', 0),
+(2, 7, 'Starter Plan', '100', 'festus@gmail.com', 10.00, 0, '50', '2025-03-24 22:11:40', '2025-03-25 22:11:40', '2025-03-29 22:11:40', 0),
+(3, 7, 'Starter Plan', '60', 'festus@gmail.com', 6.00, 0, '30', '2025-03-24 22:13:30', '2025-03-25 22:13:30', '2025-03-29 22:13:30', 0),
+(4, 7, 'basic Plan', '100', 'festus@gmail.com', 50.00, 0, '150', '2025-03-27 02:35:05', '2025-03-28 02:35:05', '2025-03-30 03:35:05', 0);
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,7 @@ CREATE TABLE `kyc` (
   `city` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   `status` enum('pending','approved','declined') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ CREATE TABLE `payment_accounts` (
   `wallet_provider` varchar(255) DEFAULT NULL,
   `wu_name` varchar(255) DEFAULT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment_accounts`
@@ -187,7 +188,7 @@ CREATE TABLE `payment_method` (
   `id` int(11) NOT NULL,
   `network` varchar(100) NOT NULL,
   `wallet_address` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,7 @@ CREATE TABLE `payment_method` (
 CREATE TABLE `site` (
   `id` int(11) NOT NULL,
   `ref_bal` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `site`
@@ -229,14 +230,14 @@ CREATE TABLE `trade` (
   `entry_price` varchar(255) NOT NULL,
   `type` enum('self_trade','copy_trade') NOT NULL,
   `expert_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `trade`
 --
 
 INSERT INTO `trade` (`id`, `user_id`, `pair`, `amount`, `order_type`, `stop_loss`, `take_profit`, `created_at`, `status`, `risk_reward`, `total_profit`, `pip_value`, `entry_price`, `type`, `expert_id`) VALUES
-(1, 6, 'ETH-USDT', '40', 'buy', '100.0000', '600.0000', '2025-03-10 22:32:30', 'won', '1:4', '3200', '0.2', '200', 'self_trade', 0);
+(1, 6, 'ETH-USDT', '40', 'buy', 100.0000, 600.0000, '2025-03-10 22:32:30', 'won', '1:4', '3200', '0.2', '200', 'self_trade', 0);
 
 -- --------------------------------------------------------
 
@@ -274,17 +275,19 @@ CREATE TABLE `users` (
   `kycstatus` enum('null','pending','declined','approved') NOT NULL,
   `copy_balance` varchar(255) NOT NULL DEFAULT '0',
   `copy_rise` varchar(255) NOT NULL DEFAULT '1:2',
-  `copy_expert` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `copy_expert` int(11) NOT NULL,
+  `is_approved` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user`, `name`, `email`, `phone`, `profile_image`, `password`, `country`, `wallet`, `ref_wallet`, `gain_wallet`, `total_deposit`, `total_withdrawal`, `trading_commission`, `pending_investment`, `referral_balance`, `referral`, `account_warning`, `restriction`, `promo_won`, `ref_id`, `referree`, `date_registered`, `paid_ref`, `dn_with`, `status`, `kycstatus`, `copy_balance`, `copy_rise`, `copy_expert`) VALUES
-(2, 'firstclass', 'firstclass', 'firstclass@gmail.com', '949494', '--', 'firstclass123', 'Afghanistan', '5', '0', '0', 0, 0, 0, 0, 10, 0, 'no', 'no', '', '1115504554', '', '2025-01-21 19:19:55', '0', 0, '0', 'null', '0', '1:2', 0),
-(6, 'thebest', 'thebest', 'spotwebdev.com@gmail.com', '07080879952', '--', 'thebest', 'Albania', '3920', '0', '0', 1303, 0, 0, 0, 0, 0, 'no', 'no', '', '228706318', '1115504554', '2025-01-21 19:47:40', '1', 0, '0', 'null', '200', '1:2', 4),
-(7, 'aypvkhag', 'jfjf', 'festus@gmail.com', 'fff', '1739257269.jpg', 'repented', 'Afghanistan', '40', '0', '0', 0, 0, 0, 0, 100, 0, 'no', 'no', '', '173257284', '', '2025-01-24 19:49:29', '1', 0, '0', 'null', '0', '1:2', 0);
+INSERT INTO `users` (`id`, `user`, `name`, `email`, `phone`, `profile_image`, `password`, `country`, `wallet`, `ref_wallet`, `gain_wallet`, `total_deposit`, `total_withdrawal`, `trading_commission`, `pending_investment`, `referral_balance`, `referral`, `account_warning`, `restriction`, `promo_won`, `ref_id`, `referree`, `date_registered`, `paid_ref`, `dn_with`, `status`, `kycstatus`, `copy_balance`, `copy_rise`, `copy_expert`, `is_approved`) VALUES
+(2, 'firstclass', 'firstclass', 'firstclass@gmail.com', '949494', '--', 'firstclass123', 'Afghanistan', '5', '0', '0', 0, 0, 0, 0, 10, 0, 'no', 'no', '', '1115504554', '', '2025-01-21 19:19:55', '0', 0, '0', 'null', '0', '1:2', 0, 0),
+(6, 'thebest', 'thebest', 'spotwebdev.com@gmail.com', '07080879952', '--', 'thebest', 'Albania', '3920', '0', '0', 1303, 0, 0, 0, 0, 0, 'no', 'no', '', '228706318', '1115504554', '2025-01-21 19:47:40', '1', 0, '0', 'null', '200', '1:2', 4, 0),
+(7, 'aypvkhag', 'jfjf', 'festus@gmail.com', 'fff', '1739257269.jpg', 'repented', 'Afghanistan', '999900', '0', '100000', 10000, 0, 0, 0, 100, 0, 'no', 'no', '', '173257284', '', '2025-01-24 19:49:29', '1', 0, '0', 'null', '0', '1:2', 0, 1),
+(8, 'Ogbodo', 'edith', 'micheal@gmail.com', '', '', 'micheal', '', '0', '0', '0', 0, 0, 0, 0, 0, 0, 'no', 'no', '', '', '', '', '', 0, '', 'null', '0', '1:2', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -302,7 +305,7 @@ CREATE TABLE `withdrawals` (
   `method` varchar(255) NOT NULL,
   `date_withdrawn` varchar(255) NOT NULL,
   `amount` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -397,7 +400,7 @@ ALTER TABLE `expert`
 -- AUTO_INCREMENT for table `investments`
 --
 ALTER TABLE `investments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kyc`
@@ -427,7 +430,7 @@ ALTER TABLE `trade`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `withdrawals`
