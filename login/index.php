@@ -150,20 +150,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
     }
 
     // Prepare SQL query to check if user exists and get approval status
-    $stmt = $connection->prepare("SELECT id, password, is_approved FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    $stmt = mysqli_query($connection,"SELECT * FROM users WHERE email ='$email' AND password='$password'");
+   
 
     // Check if the user exists
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($user_id, $hashed_password, $is_approved);
-        $stmt->fetch();
+    if (mysqli_num_rows($stmt)) {
+        
+        $row = mysqli_fetch_assoc($stmt);
+
+        $is_approved = $row['is_approved'];
+        $user_id  = $row['id'];
+
 
         // Verify password
       
             // Check if the account is approved by the admin
-            if ($is_approved) {
+            if ($is_approved == 1) {
                 
 
                 $_SESSION['logged_in'] = $user_id;
