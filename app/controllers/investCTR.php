@@ -73,7 +73,7 @@ $id = $userDetails['id'];
                             $get_ref_user = mysqli_query($connection, "SELECT * FROM `users` WHERE `ref_id` = '$referee'");
                             if (mysqli_num_rows($get_ref_user) > 0) {
                                 $ref_details = mysqli_fetch_assoc($get_ref_user);
-                                echo $amount   .  ' -  ' .  $ref_details['wallet'] . ' = ' .  $get_ref_user['name'];
+                               
                                 $new_ref_bal = $ref_details['wallet'] + ($amount / 100 * 5);
                                 mysqli_query($connection, "UPDATE `users` SET `wallet` = '$new_ref_bal' WHERE `ref_id` = '$referee'");
                             }
