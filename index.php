@@ -97,8 +97,8 @@
 				<div class="logo" style="display: flex; align-items: center; gap: 4px;">
 					<img class="logo hidden-xs" src="image/logo.png">&nbsp;
 					<div>
-						<p style="font-size: 20px; font-weight: bolder; color: white; line-height: 24px;">Trust Asset <br>
-							Management</p>
+						<p style="font-size: 20px; font-weight: bolder; color: white; line-height: 24px;">Prime Forex <br>
+							Sphere</p>
 					</div>
 				</div>
 			</a>
@@ -176,7 +176,7 @@
 
 	</div>
 
-	<h2 class="_seg____header__">HOW Real Profit Stock Trade WORKS?</h2>
+	<h2 class="_seg____header__">HOW PRIME FOREX SPHERE WORKS?</h2>
 
 	<div class="_in_content_">
 
@@ -878,7 +878,7 @@
 
 			<div class="foot_side___">
 				<h1 class="_seg____htxt_" style="color: #FFF;">Most innovative binary option platform</h1>
-				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Real Profit Stock Trade is a company formed
+				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Prime Forex Sphere Trade is a company formed
 					by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today,
 					the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in
 					these markets.</div>
@@ -896,10 +896,7 @@
 
 			<div class="foot_side___">
 				<h1 class="_seg____htxt_" style="color: #FFF;">Risk Warning</h1>
-				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Real Profit Stock Trade is one of the
-					leading platforms in the United States offering binary options, Forex and spreads. Regulated by the
-					CFTC and located in Houston, Texas. It is also regulated by the IFSC of Belize, as well as the Cyprus
-					Securities and Exchange Commission.</div>
+				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Prime Forex Sphere Trade is one of the leading platforms in the United States & South Africa offering binary options, Forex and spreads. Regulated by the CFTC and located in Houston, Texas, London. It is also regulated by the IFSC of Belize, as well as the Cyprus and England Securities and Exchange Commission.</div>
 			</div>
 
 			<div class="foot_side___">
@@ -926,7 +923,7 @@
 					You are granted limited non-exclusive non-transferable rights to use the IP provided on this website
 					for personal and non-commercial purposes in relation to the services offered on the Website only.
 				</span>
-				<span style="color: #FFF;">Real Profit Stock Trade, &copy; 2013 - 2023</span>
+				<span style="color: #FFF;">Prime Forex SPhere Trade, &copy; 2013 - 2025</span>
 			</center>
 
 		</div>

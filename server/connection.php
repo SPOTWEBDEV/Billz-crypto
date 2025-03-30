@@ -49,11 +49,11 @@ if (!$connection) {
 }
 
 // // Site configurations
-$sitename = "Fusions Assets";
+$sitename = "Primefx Sphere";
 
 
 // email config 
-$siteemail = "support@fusionsassets.com";
+$siteemail = "support@primefxsphere.com";
 $emailpassword  = "support@fusionsassets.com";
 $host = 'mail.fusionsassets.com';
 $sitephone  = "+44 776 0957 798";
