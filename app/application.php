@@ -1,6 +1,4 @@
-<?php
-
-;
+<?php;
 include('../server/connection.php');
 include('controllers/authFy.php');
 // PREPARE USERS DETAILS;
@@ -15,7 +13,7 @@ $user_identity = $userDetails['id'];
 
 
 <!DOCTYPE html>
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 
 <head>
     <!-- Meta Data -->
@@ -48,94 +46,94 @@ $user_identity = $userDetails['id'];
     <!-- Choices Css -->
     <link rel="stylesheet" href="./assets/libs/choices.js/public/assets/styles/choices.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
-    <script  src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-        function showToast(message, backgroundColor) {
-            Toastify({
-                text: message,
-                duration: 5000,
-                gravity: "top",
-                position: "center",
-                backgroundColor: backgroundColor,
-                stopOnFocus: true,
-                className: "custom-toast",
-                style: {
-                    borderRadius: "10px",
-                    boxShadow: "5px 2px 40px -14px black",
-                    color: "#fff",
-                    fontWeight: "bolder",
-                    fontFamily: "calibri"
-                }
-            }).showToast();
-        }
-    </script>
+<script>
+    function showToast(message, backgroundColor) {
+        Toastify({
+            text: message,
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: backgroundColor,
+            stopOnFocus: true,
+            className: "custom-toast",
+            style: {
+                borderRadius: "10px",
+                boxShadow: "5px 2px 40px -14px black",
+                color: "#fff",
+                fontWeight: "bolder",
+                fontFamily: "calibri"
+            }
+        }).showToast();
+    }
+</script>
 
 
 
 <body>
     <?php
-if (isset($_POST['kyc_btn'])) {
-    
-    $firstname = mysqli_real_escape_string($connection, $_POST['firstname']);
-    $lastname = mysqli_real_escape_string($connection, $_POST['lastname']);
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $phonenumber = mysqli_real_escape_string($connection, $_POST['phonenumber']);
-    $datebirth = mysqli_real_escape_string($connection, $_POST['datebirth']);
-    $city = mysqli_real_escape_string($connection, $_POST['city']);
-    $country = mysqli_real_escape_string($connection, $_POST['country']);
-    $whoislogin = $_SESSION['id'];
+    if (isset($_POST['kyc_btn'])) {
 
-    $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$whoislogin' AND (`status`='pending' OR `status`='approved')");
+        $firstname = mysqli_real_escape_string($connection, $_POST['firstname']);
+        $lastname = mysqli_real_escape_string($connection, $_POST['lastname']);
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $phonenumber = mysqli_real_escape_string($connection, $_POST['phonenumber']);
+        $datebirth = mysqli_real_escape_string($connection, $_POST['datebirth']);
+        $city = mysqli_real_escape_string($connection, $_POST['city']);
+        $country = mysqli_real_escape_string($connection, $_POST['country']);
+        $whoislogin = $_SESSION['id'];
 
-    if (mysqli_num_rows($check)) {
-        $message = "You already applied for KYC";
-        echo "<script>showToast('$message', 'red');</script>";
-    } else {
-       
-        $target_dir = "../uploads/kyc/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        
-        // echo  $firstname . '=>' . $lastname . '=>'. $email .'=>' . $phonenumber . '=>'  .  $datebirth . '=>' . $city . '=>' . $country . '=>' . $whoislogin; ;
-        
-           
-                            
-                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif" ) {
-                        
-                         $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                         echo "<script>showToast('$message', 'red');</script>";
-                        
-                }else{
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                       
-                            $image = basename( $_FILES["fileToUpload"]["name"]);
-                           
+        $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$whoislogin' AND (`status`='pending' OR `status`='approved')");
 
-$insert = mysqli_query($connection, "INSERT INTO `kyc`(`user_id`, `firstname`, `lastname`, `email`, `phonenumber`, `datebirth`, `drivinglincense`, `city`, `country`) VALUES ('$whoislogin','$firstname','$lastname','$email','$phonenumber','$datebirth','$image','$city','$country')");
-                            if($insert){
-                              $message = "Successfully submitted your KYC";
-                            echo "<script>showToast('$message', 'green');</script>";
-                            }else{
-                                echo "<script>alert('fnfnfn');</script>";
-                                $message = "Error Occurs .....";
-                            echo "<script>showToast('$message', 'red');</script>";
-                            }
-                        } else {
-                            $message = "Sorry, there was an error uploading your file.";
-                            echo "<script>showToast('$message', 'red');</script>";
-                        }
+        if (mysqli_num_rows($check)) {
+            $message = "You already applied for KYC";
+            echo "<script>showToast('$message', 'red');</script>";
+        } else {
+
+            $target_dir = "../uploads/kyc/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+            // echo  $firstname . '=>' . $lastname . '=>'. $email .'=>' . $phonenumber . '=>'  .  $datebirth . '=>' . $city . '=>' . $country . '=>' . $whoislogin; ;
+
+
+
+            if (
+                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif"
+            ) {
+
+                $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "<script>showToast('$message', 'red');</script>";
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+                    $image = basename($_FILES["fileToUpload"]["name"]);
+
+
+                    $insert = mysqli_query($connection, "INSERT INTO `kyc`(`user_id`, `firstname`, `lastname`, `email`, `phonenumber`, `datebirth`, `drivinglincense`, `city`, `country`) VALUES ('$whoislogin','$firstname','$lastname','$email','$phonenumber','$datebirth','$image','$city','$country')");
+                    if ($insert) {
+                        $message = "Successfully submitted your KYC";
+                        echo "<script>showToast('$message', 'green');</script>";
+                    } else {
+                        echo "<script>alert('fnfnfn');</script>";
+                        $message = "Error Occurs .....";
+                        echo "<script>showToast('$message', 'red');</script>";
+                    }
+                } else {
+                    $message = "Sorry, there was an error uploading your file.";
+                    echo "<script>showToast('$message', 'red');</script>";
                 }
-        
-        
+            }
+        }
     }
-}
 
-function showToast($message, $backgroundColor) {
-    echo '<script>
+    function showToast($message, $backgroundColor)
+    {
+        echo '<script>
             const customToast = Toastify({
                 text: "' . $message . '",
                 duration: 5000,
@@ -153,7 +151,7 @@ function showToast($message, $backgroundColor) {
                 }
             }).showToast();
           </script>';
-}
+    }
 
     ?>
     <!-- Start Switcher -->
@@ -188,7 +186,7 @@ function showToast($message, $backgroundColor) {
                 <!-- Start::row-1 -->
                 <form method="POST" class="row" enctype="multipart/form-data">
                     <div class="col-xl-6">
-                        <div  class="card custom-card">
+                        <div class="card custom-card">
                             <div class="card-header">
                                 <div class="card-title">Personal-information</div>
                             </div>
@@ -332,8 +330,8 @@ function showToast($message, $backgroundColor) {
         <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
     </div>
     <div id="responsive-overlay"></div>
-   <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
-   
+    <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+
 
     <script src="./assets/libs/@popperjs/core/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
@@ -357,7 +355,7 @@ function showToast($message, $backgroundColor) {
     <script src="./assets/js/custom-switcher.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/custom.js"></script>
-   
+
 </body>
 
 </html>
