@@ -46,7 +46,7 @@ $apiKey = "1312f57d-3307-4c2b-bd94-9850caf54b40";
 $connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 
 
-$check = mysqli_query($connection,"INSERT INTO `testcron`(`type`) VALUES ('trade')")
+$check = mysqli_query($connection,"INSERT INTO `testcron`(`type`) VALUES ('trade')");
 
 
 

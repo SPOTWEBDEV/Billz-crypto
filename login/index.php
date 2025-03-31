@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
         // Verify password
       
             // Check if the account is approved by the admin
-            if ($is_approved == 1) {
+            // if ($is_approved == 1) {
                 
 
                 $_SESSION['logged_in'] = $user_id;
@@ -183,18 +183,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
                 });
                 </script>';
                 
-            } else {
-                // Account is not approved
-                echo '<script>
-                Swal.fire({
-                    title: "Warning!",
-                    text: "Your account is not approved yet. Please wait for admin approval.",
-                    icon: "warning",
-                    confirmButtonText: "OK"
-                });
-                </script>';
+            // } else {
+            //     // Account is not approved
+            //     echo '<script>
+            //     Swal.fire({
+            //         title: "Warning!",
+            //         text: "Your account is not approved yet. Please wait for admin approval.",
+            //         icon: "warning",
+            //         confirmButtonText: "OK"
+            //     });
+            //     </script>';
                 
-            }
+            // }
        
     } else {
         // User does not exist

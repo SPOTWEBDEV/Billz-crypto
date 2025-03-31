@@ -11918,7 +11918,6 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
 }
 @media (min-width: 992px) {
   .app-content {
