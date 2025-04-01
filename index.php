@@ -1,7 +1,7 @@
 <?php include('./server/connection.php') ?>
 <!DOCTYPE html>
 <html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>

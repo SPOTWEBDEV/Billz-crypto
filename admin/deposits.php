@@ -230,12 +230,10 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                         $subj = 'Deposit Declination';
                         $result = smtpmailer($to, $siteemail, $sitename, $subj, $body);;
 
-                        if ($result) {
-                          echo "<script> Swal.fire('Success','You request to declined this deposit went through','success') </script>";
+                         echo "<script> Swal.fire('Success','You request to declined this deposit went through','success') </script>";
                           echo "<script> setTimeout( ()=> { window.open('deposits.php','_self') }, 2000) </script>";
-                        } else {
-                          echo "<script>Swal.fire('Error', 'Something went wrong', 'error')</script>";
-                        }
+                        
+                        
                       } else {
                         echo "<script> Swal.fire('Error','COULD NOT DECLINED','error') </script>";
                       }
@@ -300,12 +298,10 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                           $subj = 'Deposit Approved';
                           $result = smtpmailer($to, $siteemail, $sitename, $subj, $body);;
 
-                          if ($result) {
+                          
                             echo "<script>Swal.fire('Great Job','TRANSACTION APPROVED','success')</script>";
                             echo "<script>setTimeout( ()=> {window.open('deposits.php','_self')}, 2000)</script>";
-                          } else {
-                            echo "<script>Swal.fire('Error', 'Something went wrong', 'error')</script>";
-                          }
+                          
                         } else {
                           echo "<script>Swal.fire('Error','FAILED TO APPROVE','error')</script>";
                         }

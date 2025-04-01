@@ -131,12 +131,12 @@ if ($resultres) {
                         </section>
                         </body>
                         </html>";
-                                $result = smtpmailer($to, $siteemail, $sitename, $subj, $body);
+                                $result = smtpmailer($email, $siteemail, $sitename, $subj, $body);
 
 
                                 if ($result && $deposit &&  $sql) {
 
-                                    $url = $domain . 'app/withdrawals.php';
+                                    $url = $domain . '../withdrawals.php';
 
 
                                     echo "<script> 

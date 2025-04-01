@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="main-content app-content">
             <div class="container-fluid">
                 <div class="row py-2 " style="row-gap: 10px;">
-                    <div class="col-12 col-md-9" style="height:650px">
+                    <div class="col-12 col-md-8" style="height:650px">
                         <div class="tradingview-widget-container" style="height:100%;width:100%">
                             <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
                             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <!-- Market Order Form -->
-                    <form method="POST" class="col-12 col-md-3" id="tradeForm">
+                    <form method="POST" class="col-12 col-md-4" id="tradeForm">
                         <div class="card p-3">
                             <h5 class="text-center text-white">Place Market Order</h5>
 
