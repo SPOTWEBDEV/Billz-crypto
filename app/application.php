@@ -1,6 +1,6 @@
-<?php;
+<?php
 include('../server/connection.php');
-include('controllers/authFy.php');
+// include('controllers/authFy.php');
 // PREPARE USERS DETAILS;
 include('controllers/userDetails.php');
 

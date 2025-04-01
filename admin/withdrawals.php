@@ -254,11 +254,9 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                         $subj = 'Withdrawal Declined';
                         $result = smtpmailer($to, $siteemail, $sitename, $subj, $body);;
 
-                        if ($result) {
+                       
                           echo "<script>setTimeout( ()=> {window.open('withdrawals.php','_self')}, 2000)</script>";
-                        } else {
-                          echo "<script> Swal.fire('Error','Failed to send email: " . $result . "','error') </script>";
-                        }
+                        
                       } else {
                         echo "<script> Swal.fire('Error','COULD NOT DECLINED','error') </script>";
                       }
@@ -292,7 +290,7 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                           $update_r_bal = mysqli_query($connection, "UPDATE `users` SET `wallet` = '$r_new_balance' WHERE `id` = '$sender'");
                         } else if ($from_account == '2') {
                           $r_bal = $r_rows['gain_wallet'];
-                          $r_new_balance = $r_bal - $r_amount;
+                          $r_new_balance = $r_bal - $trf_amount;
                           $update_r_bal = mysqli_query($connection, "UPDATE `users` SET `gain_wallet` = '$r_new_balance' WHERE `id` = '$sender'");
                         } else if ($from_account == '3') {
                           $r_bal = $r_rows['ref_wallet'];
@@ -340,13 +338,11 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
 
 
 
-                          if ($result === true) {
+                          
                             echo "<script>Swal.fire('Great Job','TRANSACTION APPROVED','success')</script>";
                             // Additional logic or redirect if needed
                             echo "<script>setTimeout( ()=> {window.open('withdrawals.php','_self')}, 2000)</script>";
-                          } else {
-                            echo "<script> Swal.fire('Error','Failed to approve withdrawal: " . $result . "','error') </script>";
-                          }
+                          
                         } else {
                           echo "<script>Swal.fire('Error','FAILED TO APPROVE','error')</script>";
                         }

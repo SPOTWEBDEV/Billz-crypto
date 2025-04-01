@@ -118,7 +118,7 @@ $id = $userDetails['id'];
                         $subj = 'Investment Request';
                         $result = smtpmailer($to, $siteemail, $sitename, $subj, $body);
 
-                        if ($result) {
+                       
                             $url = $domain . 'app/investments.php';
                             echo "
                             <script>
@@ -127,16 +127,7 @@ $id = $userDetails['id'];
                                     window.open('$url', '_self');
                                 }, 5000);
                             </script>";
-                        } else {
-                            echo "
-                            <script>
-                                Swal.fire('Investment Failed', 'Your investment request failed', 'error');
-                                 setTimeout(() => { 
-                                    window.open('$url', '_self');
-                                }, 5000);
-                            </script>";
-
-                        }
+                        
                     } else {
                         echo "
                         <script>

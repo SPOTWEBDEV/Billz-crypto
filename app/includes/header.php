@@ -1,12 +1,12 @@
 <?php
 // ;
-// include('../config/db-config.php');
 
 
-// include('controllers/authFy.php');
+
+include('controllers/authFy.php');
 
 // // PREPARE USERS DETAILS;
-// include('controllers/userDetails.php');
+include('controllers/userDetails.php');
 ?>
 <header class="app-header">
     <!-- Start::main-header-container -->

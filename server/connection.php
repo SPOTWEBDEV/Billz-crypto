@@ -30,9 +30,9 @@ define("HOST", "localhost");
 // Set configurations based on protocol
 if ($request == 'https') {
     $domain = "https://primefxsphere.com/";
-    define("USER", "xanvyvbs_billz-crypto");
-    define("PASSWORD", "xanvyvbs_billz-crypto");
-    define("DATABASE", "xanvyvbs_billz-crypto");
+    define("USER", "tifkvkth_billz-crypto");
+    define("PASSWORD", "tifkvkth_billz-crypto");
+    define("DATABASE", "tifkvkth_billz-crypto");
 }
 elseif ($request == 'http') {
     $domain = "http://localhost/Billz-crypto/";
