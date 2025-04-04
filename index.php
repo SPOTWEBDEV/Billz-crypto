@@ -1,18 +1,18 @@
 <?php include('./server/connection.php') ?>
 <!DOCTYPE html>
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
-	<title> <?php echo $sitename?></title>
+	<title> <?php echo $sitename ?></title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="description"
-		content=" <?php echo $sitename?> is a true opportunity to earn on cryptocurrency/binary. <?php echo $sitename?>is a company formed by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today, the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in these markets.">
-	
+		content=" <?php echo $sitename ?> is a true opportunity to earn on cryptocurrency/binary. <?php echo $sitename ?>is a company formed by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today, the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in these markets.">
+
 	<link rel="icon" href="image/favicon.png" sizes="32x32" type="image/png">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -104,7 +104,7 @@
 			</a>
 			<a class="__tL" href="<?php echo $domain ?>register">REGISTER</a>
 			<a class="__tL" href="<?php echo $domain ?>login">LOGIN</a>
-		
+
 
 		</div>
 	</div>
@@ -904,10 +904,16 @@
 				<p class="_txt___ _cLink">Address: <span
 						style="font-size: inherit; color: #f7931a; text-transform: capitalize;">Houston, Texas
 						USA</span></p>
+<<<<<<< HEAD
 				<!-- <p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
 				</p> -->
 				<!-- <p id="wa-number" class="_txt___ _cLink">Whatsapp: </p> -->
 				<p id="wa-number" class="_txt___ _cLink">Email: <?php echo $siteemail?></p>
+=======
+				<p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail ?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
+				</p>
+
+>>>>>>> 758de2a6e25e090ba2d0f05b91f41b341fd754d0
 
 			</div>
 		</div>
@@ -962,12 +968,12 @@
 		$(document).ready(function() {
 			$('#notification-1').Notification({
 				// Notification varibles
-				Varible1: ["Dirk", "Johnny", "Watkin ", "Alejandro", "Vina", "Tony", "Ahmed", "Jackson", "Noah", "Aiden", "Darren", "Isabella", "Aria", "John", "Greyson", "Peter", "Mohammed", "William",
-					"Lucas", "Amelia", "Mason", "Mathew", "Richard", "Chris", "Mia", "Oliver"
+				Varible1: ["Thabo", "Sipho", "Mpho", "Kagiso", "Lerato", "Banele", "Sibusiso", "Themba", "Nomvula", "Lindiwe",
+					"Andile", "Nkosinathi", "Zanele", "Mandisa", "Siyabonga", "Dineo", "Tsepo", "Tumi", "Nandi", "Ayanda",
+					"Khanyisile", "Boitumelo", "Hlengiwe", "Phumlani", "Vusi", "Thandeka", "Mandla", "Gugu", "Jabulani"
 				],
-				Varible2: ["USA", "UAE", "ITALY", "FLORIDA", "MEXICO", "INDIA", "CHINA", "CAMBODIA", "UNITED KINGDOM", "GERMANY", "AUSTRALIA", "BANGLADESH", "SWEDEN", "PAKISTAN", "MALDIVES", "SEYCHELLES",
-					"BOLIVIA",
-					"SOUTH AFRICA", "ZAMBIA", "ZIMBABWE", "LEBANESE", "SAUDI ARABIA", "CHILE", "PEUTO RICO"
+				Varible2: ["South Africa", "Namibia", "Botswana", "Zimbabwe", "Mozambique", "Lesotho", "Eswatini", "Angola",
+					"Malawi", "Zambia", "Tanzania", "DR Congo", "Madagascar"
 				],
 
 				Amount: [1000, 2500, 5550, 6660, 4454, 3833, 6969],
