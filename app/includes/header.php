@@ -122,7 +122,7 @@ include('controllers/userDetails.php');
         </style>
 
         <div class="header-content-right">
-            <div class="header-element header-theme-mode">
+            <!-- <div class="header-element header-theme-mode">
                 <a class="header-link layout-setting">
                     <span class="light-layout">
                         <i class="bx bx-moon header-link-icon"></i>
@@ -131,7 +131,7 @@ include('controllers/userDetails.php');
                         <i class="bx bx-sun header-link-icon"></i>
                     </span>
                 </a>
-            </div>
+            </div> -->
             <!-- <div class="header-element header-fullscreen">
                 <a onclick="openFullscreen()" class="header-link">
                     <i class="bx bx-fullscreen full-screen-open header-link-icon"></i>
