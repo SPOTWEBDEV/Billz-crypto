@@ -20,7 +20,7 @@ include('controllers/logOut.php');
 ?>
 
 <!DOCTYPE html>
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 
 <head>
     <!-- Meta Data -->
@@ -98,15 +98,19 @@ include('controllers/logOut.php');
                                 <div class="card-title">Select Deposit Method</div>
                             </div>
                             <div class="card-body">
-                                <select id="deposit_method" name="method" class="js-example-placeholder-single js-states form-control">
+                                <select id="deposit_method" name="method" class="form-control">
+                                    <option disabled selected>Select Method</option>
                                     <?php
-                                    $payment = mysqli_query($connection, "SELECT * FROM payment_accounts");
-                                    while ($row_payment = mysqli_fetch_assoc($payment)) { ?>
-                                        <option bankname="<?php echo $row_payment['bank_name'] ?>" account_name="<?php echo $row_payment['account_name'] ?>" value="<?php echo $row_payment['payment_type'] ?>" account_number="<?php echo $row_payment['account_number'] ?>">
-                                            <?php echo $row_payment['payment_type'] ?>
-                                        </option>
-                                    <?php }
+                                    $methods = mysqli_query($connection, "SELECT DISTINCT payment_type FROM payment_accounts");
+                                    while ($row = mysqli_fetch_assoc($methods)) {
+                                        echo '<option value="' . $row['payment_type'] . '">' . $row['payment_type'] . '</option>';
+                                    }
                                     ?>
+                                </select>
+                                <br>
+                                <label for="type">Type</label>
+                                <select name="type" id="type" class="form-control">
+                                    <option disabled selected>Select Type</option>
                                 </select>
                             </div>
                         </div>
@@ -127,9 +131,8 @@ include('controllers/logOut.php');
                                     <div><a id="copyBtn" class="dropdown-item btn btn-primary">Copy</a></div>
                                 </div>
 
-                                <label for="input-label" class="form-label">Payment Details</label>
-                                <div id="paymentDetails">
-                                </div>
+                                <label class="form-label">Payment Details</label>
+                                <div id="paymentDetails"></div>
 
                                 <input type="text" id="copyBoard" style="position: absolute; left: -9999px;">
                             </div>
@@ -143,16 +146,16 @@ include('controllers/logOut.php');
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-2">
-                                    <input type="text" name="amount" class="form-control" id="floatingInput" placeholder="Amount Sent">
-                                    <label for="floatingInput">Amount Sent</label>
+                                    <input type="text" name="amount" class="form-control" placeholder="Amount Sent">
+                                    <label>Amount Sent</label>
                                 </div>
                                 <div id="giftCardFields" style="display:none">
                                     <div class="form-floating mt-2">
-                                        <input type="text" name="gift_card_code" class="form-control" id="giftCardCode" placeholder="Gift Card Code" >
+                                        <input type="text" name="gift_card_code" class="form-control" id="giftCardCode" placeholder="Gift Card Code">
                                         <label for="giftCardCode">Gift Card Code</label>
                                     </div>
                                     <div class="form-floating mt-2">
-                                        <input type="file" name="gift_card_image" class="form-control" id="giftCardImage" accept="image/*" >
+                                        <input type="file" name="gift_card_image" class="form-control" id="giftCardImage" accept="image/*">
                                         <label for="giftCardImage">Upload Gift Card Image</label>
                                     </div>
                                 </div>
@@ -166,97 +169,102 @@ include('controllers/logOut.php');
                 </form>
 
                 <script>
+                    const depositMethod = document.querySelector('#deposit_method');
+                    const typeDropdown = document.querySelector('#type');
+                    const paymentDetailsDiv = document.querySelector('#paymentDetails');
+                    const giftCardFields = document.getElementById('giftCardFields');
                     const copyBoard = document.querySelector('#copyBoard');
                     const copyBtn = document.querySelector('#copyBtn');
-                    let depositMethod = document.querySelector('#deposit_method');
-                    let giftCardFields = document.getElementById('giftCardFields'); // Reference to gift card fields
 
-                    // Function to display wallet details
-                    function displayWallet(method, accountNumber, accountName, bankName) {
-                        const detailsDiv = document.getElementById('paymentDetails');
+                    // Store all payment accounts
+                    const allAccounts = <?php
+                                        $accounts = [];
+                                        $query = mysqli_query($connection, "SELECT * FROM payment_accounts");
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            $accounts[] = $row;
+                                        }
+                                        echo json_encode($accounts);
+                                        ?>;
+
+                    // Update Type dropdown
+                    depositMethod.addEventListener('change', () => {
+                        const method = depositMethod.value;
+                        const filteredTypes = allAccounts.filter(acc => acc.payment_type === method);
+                        typeDropdown.innerHTML = '<option disabled selected>Select Type</option>';
+
+                        filteredTypes.forEach(acc => {
+                            let optionLabel = method === 'Wallet' ? acc.wallet_provider :
+                                method === 'Bank' ? acc.bank_name :
+                                method === 'Western Union' ? acc.account_name :
+                                method === 'Gift Card' ? 'Gift Card' : acc.account_name;
+
+                            let value = acc.id; // Store account ID for later
+
+                            let option = document.createElement('option');
+                            option.value = value;
+                            option.textContent = optionLabel;
+                            option.setAttribute('data-method', method);
+                            option.setAttribute('data-wallet', acc.wallet_provider);
+                            option.setAttribute('data-bankname', acc.bank_name);
+                            option.setAttribute('data-accountname', acc.account_name);
+                            option.setAttribute('data-accountnumber', acc.account_number);
+                            typeDropdown.appendChild(option);
+                        });
+
+                        giftCardFields.style.display = method === 'Gift Card' ? 'block' : 'none';
+                        paymentDetailsDiv.innerHTML = '';
+                    });
+
+                    // Display details when type is selected
+                    typeDropdown.addEventListener('change', () => {
+                        const selected = typeDropdown.selectedOptions[0];
+                        const method = selected.getAttribute('data-method');
+                        const wallet = selected.getAttribute('data-wallet');
+                        const bankName = selected.getAttribute('data-bankname');
+                        const accountName = selected.getAttribute('data-accountname');
+                        const accountNumber = selected.getAttribute('data-accountnumber');
+
+                        paymentDetailsDiv.innerHTML = '';
+
                         switch (method) {
-                            case "Wallet":
-                                detailsDiv.innerHTML = `<p><strong>Wallet Address:</strong> ${accountNumber}</p>`;
-                                copyBoard.value = `${accountNumber}`;
+                            case 'Wallet':
+                                paymentDetailsDiv.innerHTML += `<p><strong>Crypto Type:</strong> ${wallet}</p>`;
+                                paymentDetailsDiv.innerHTML += `<p><strong>Wallet Address:</strong> ${accountNumber}</p>`;
+                                copyBoard.value = accountNumber;
                                 break;
-                            case "Bank":
-                                detailsDiv.innerHTML = `<p><strong>Bank Name:</strong> ${bankName}</p>`;
-                                detailsDiv.innerHTML += `<p><strong>Bank Account Number:</strong> ${accountNumber}</p>`;
-                                detailsDiv.innerHTML += `<p><strong>Bank Account Name:</strong> ${accountName}</p>`;
-                                copyBoard.value = `${accountNumber}`;
+                            case 'Bank':
+                                paymentDetailsDiv.innerHTML += `<p><strong>Bank:</strong> ${bankName}</p>`;
+                                paymentDetailsDiv.innerHTML += `<p><strong>Account Name:</strong> ${accountName}</p>`;
+                                paymentDetailsDiv.innerHTML += `<p><strong>Account Number:</strong> ${accountNumber}</p>`;
+                                copyBoard.value = accountNumber;
                                 break;
-                            case "Western Union":
-                                detailsDiv.innerHTML = `<p><strong>Wallet Address:</strong> ${accountNumber}</p>`;
-                                detailsDiv.innerHTML += `<p><strong>Bank Account Name:</strong> ${accountName}</p>`;
-                                copyBoard.value = `${accountNumber}`;
+                            case 'Western Union':
+                                paymentDetailsDiv.innerHTML += `<p><strong>Account Name:</strong> ${accountName}</p>`;
+                                paymentDetailsDiv.innerHTML += `<p><strong>Reference Number:</strong> ${accountNumber}</p>`;
+                                copyBoard.value = accountNumber;
                                 break;
-                            case "Gift Card": // For Gift card payment type
-                                detailsDiv.innerHTML = `<p><strong>Gift Card</strong> selected. Please enter details below.</p>`;
-                                copyBoard.value = ''; // No default value for gift card
-                                giftCardFields.style.display = 'block'; // Show gift card fields
-                                break;
-                            default:
+                            case 'Gift Card':
+                                paymentDetailsDiv.innerHTML += `<p><strong>Provide Gift Card details below.</strong></p>`;
+                                copyBoard.value = '';
                                 break;
                         }
-                    }
-
-                    // Event listener for when a user changes the deposit method
-                    depositMethod.addEventListener('change', (e) => {
-                        const selectedOption = e.target.selectedOptions[0];
-                        const accountNumber = selectedOption.getAttribute('account_number');
-                        const bankName = selectedOption.getAttribute('bankname');
-                        const accountName = selectedOption.getAttribute('account_name');
-                        const paymentMethod = e.target.value;
-
-                        console.log(paymentMethod, accountNumber); // Debugging
-
-                        displayWallet(paymentMethod, accountNumber, accountName, bankName);
                     });
 
-                    // Automatically trigger change on page load for the selected option
-                    window.addEventListener('load', () => {
-                        const selectedOption = depositMethod.selectedOptions[0]; // Get the default selected option
-                        const accountNumber = selectedOption.getAttribute('account_number');
-                        const bankName = selectedOption.getAttribute('bankname');
-                        const accountName = selectedOption.getAttribute('account_name');
-                        const paymentMethod = depositMethod.value;
+                    // Copy button
+                    copyBtn.onclick = () => {
+                        copyBoard.select();
+                        document.execCommand("copy");
+                        alert("Copied to clipboard!");
+                    };
 
-                        displayWallet(paymentMethod, accountNumber, accountName, bankName);
-                    });
-
-                    // Copy to clipboard functionality
-                    (function() {
-                        "use strict";
-
-                        function copyToClipboard(elem) {
-                            var target = elem;
-                            target.focus();
-                            target.setSelectionRange(0, target.value.length);
-
-                            try {
-                                document.execCommand("copy");
-                                alert('Successfully copied payment details');
-                            } catch (e) {
-                                console.warn(e);
-                            }
-                        }
-
-                        copyBtn.onclick = function() {
-                            copyToClipboard(copyBoard);
-                        };
-                    })();
-
+                    // Gift Card validation
                     document.querySelector('form').addEventListener('submit', (e) => {
                         if (depositMethod.value === 'Gift Card') {
-                            document.getElementById('giftCardCode').focus();
-                            document.getElementById('giftCardImage').focus();
-                            const giftCardCode = document.getElementById('giftCardCode').value.trim();
-                            const giftCardImage = document.getElementById('giftCardImage').files.length;
-
-                            // Check if the fields are visible and not empty
-                            if (!giftCardCode || !giftCardImage) {
+                            const code = document.getElementById('giftCardCode').value.trim();
+                            const image = document.getElementById('giftCardImage').files.length;
+                            if (!code || !image) {
                                 alert('Please provide both the gift card code and image.');
-                                e.preventDefault(); // Prevent form submission
+                                e.preventDefault();
                             }
                         }
                     });
