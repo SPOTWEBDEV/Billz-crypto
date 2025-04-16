@@ -60,7 +60,7 @@ function formatNumber($number, $decimals = 2)
 
 
 <!DOCTYPE html>
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 
 <head>
     <!-- Meta Data -->
@@ -89,6 +89,9 @@ function formatNumber($number, $decimals = 2)
     <!-- Choices Css -->
     <link rel="stylesheet" href="./assets/libs/choices.js/public/assets/styles/choices.min.css" />
     <!-- <meta name="theme-color" content="#e7ecef" /> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
     <meta name="google" content="notranslate">
@@ -526,7 +529,7 @@ function formatNumber($number, $decimals = 2)
                                                 <tr>
                                                     <td><?php echo $count; ?></td>
                                                     <td><?php echo $row['source_table']; ?></td>
-                                                    <td><?php echo number_format($row['amount'],2); ?></td>
+                                                    <td><?php echo number_format($row['amount'], 2); ?></td>
                                                     <td><?php echo $row['date']; ?></td>
                                                     <td>
                                                         <?php
@@ -607,6 +610,9 @@ function formatNumber($number, $decimals = 2)
             ?>
 
         </div>
+        <section id="modelWapper">
+
+        </section>
         <?php include('./includes/popin_with.php') ?>
         <!-- <div class="scrollToTop">
             <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
@@ -635,6 +641,7 @@ function formatNumber($number, $decimals = 2)
         <script src="./assets/js/custom-switcher.min.js"></script>
         <!-- Custom JS -->
         <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/wallet.js"></script>
 </body>
 
 </html>

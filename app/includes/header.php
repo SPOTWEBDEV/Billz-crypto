@@ -142,7 +142,7 @@ include('controllers/userDetails.php');
             </div> -->
 
 
-            <div class="h-100 d-none d-md-flex align-items-center">
+            <div class="h-100 d-none d-md-flex align-items-center" data-toggle="modal" data-target=".bd-example-modal-sm">
                 <button type="button" class="btn btn-primary py-2">Connect Wallet</button>
             </div>
 
@@ -189,11 +189,12 @@ include('controllers/userDetails.php');
                     <li>
                         <a class="dropdown-item d-flex">
                             <div class="h-100 d-flex align-items-center">
-                                <button type="button" class="btn btn-primary py-2">Connect Wallet</button>
+                                <button data-toggle="modal" data-target=".bd-example-modal-sm" type="button" class="btn btn-primary py-2">Connect Wallet</button>
                             </div>
                         </a>
 
                     </li>
+
                 </ul>
             </div>
 
