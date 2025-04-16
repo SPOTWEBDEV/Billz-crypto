@@ -38,22 +38,10 @@ if ($isLocalhost) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Commented out online connection
-    /*
-    function connectionOnline() {
-        $domain = "https://primefxsphere.com/";
-        define("USER", "tifkvkth_billz-crypto");
-        define("PASSWORD", "tifkvkth_billz-crypto");
-        define("DATABASE", "tifkvkth_billz-crypto");
-        $connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-        if (!$connection) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-    }
-    */
+  
 } else {
     // Online (Live Server)
-    $domain = "https://primefxsphere.com/";
+    $domain = "https://quanstofy.com/";
 
     define("USER", "tifkvkth_billz-crypto");
     define("PASSWORD", "tifkvkth_billz-crypto");
@@ -65,19 +53,7 @@ if ($isLocalhost) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Commented out offline connection
-    /*
-    function connectionOffline() {
-        $domain = "http://localhost/Billz-crypto/";
-        define("USER", "root");
-        define("PASSWORD", "");
-        define("DATABASE", "billz-crypto");
-        $connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-        if (!$connection) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-    }
-    */
+   
 }
 
 // Site configurations

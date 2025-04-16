@@ -79,27 +79,8 @@
             </ul>
         </li>
 
-        <!-- Signal -->
-        <!-- <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <div data-i18n="Layouts">📡 Signal</div>
-        </a>
-        <ul class="menu-sub">
-            <li class="menu-item"><a href="add-signal.php" class="menu-link">➕ Add Signal</a></li>
-            <li class="menu-item"><a href="view-signal.php" class="menu-link">👀 View Signal</a></li>
-        </ul>
-    </li> -->
 
-        <!-- Expert -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <div data-i18n="Layouts">🧑‍🏫 Expert</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item"><a href="add_expert.php" class="menu-link">➕ Add Expert</a></li>
-                <li class="menu-item"><a href="view_expert.php" class="menu-link">👀 View Expert</a></li>
-            </ul>
-        </li>
+        
 
         <!-- Trade -->
         <li class="menu-item">
@@ -108,8 +89,6 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item"><a href="self_trade.php" class="menu-link">🔄 Self Trade</a></li>
-                <li class="menu-item"><a href="add_copy_trade.php" class="menu-link">➕ Add Copy Trade</a></li>
-                <li class="menu-item"><a href="copy_trade.php" class="menu-link">📑 Copy Trade</a></li>
             </ul>
         </li>
 

