@@ -62,7 +62,7 @@ $sitename = "Primefx Sphere";
 // Email Config 
 $siteemail = "support@quanstofy.com";
 $emailpassword  = "support@quanstofy.com";
-$host = 'mail.quanstofy.com'
+$host = 'mail.quanstofy.com';
 $sitephone  = "+44 776 0957 798";
 $siteaddress  = "Weston, New York";
 
