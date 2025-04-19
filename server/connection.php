@@ -60,9 +60,9 @@ if ($isLocalhost) {
 $sitename = "Primefx Sphere";
 
 // Email Config 
-$siteemail = "support@primefxsphere.com";
-$emailpassword  = "support@fusionsassets.com";
-$host = 'mail.fusionsassets.com';
+$siteemail = "support@quanstofy.com";
+$emailpassword  = "support@quanstofy.com";
+$host = 'mail.quanstofy.com'
 $sitephone  = "+44 776 0957 798";
 $siteaddress  = "Weston, New York";
 

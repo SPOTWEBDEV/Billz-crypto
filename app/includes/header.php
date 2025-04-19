@@ -8,6 +8,8 @@ include('controllers/authFy.php');
 // // PREPARE USERS DETAILS;
 include('controllers/userDetails.php');
 ?>
+<script src="//code.jivosite.com/widget/k6TbFdVeWO" async></script>
+
 <header class="app-header">
     <!-- Start::main-header-container -->
     <div class="main-header-container container-fluid">

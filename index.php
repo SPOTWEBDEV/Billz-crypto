@@ -22,6 +22,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="alert/css/animate.min.css">
 	<link rel="stylesheet" href="alert/css/fake-notification-min.css">
+	<script src="//code.jivosite.com/widget/k6TbFdVeWO" async></script>
+
 	<style type="text/css">
 		.logo {
 			height: 55px;
