@@ -1,13 +1,14 @@
 <?php
 
 include('../server/connection.php');
+include('../mailer/index.php');
 
 
 
-if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) echo "<script> window.location.href = 'login.php' </script>"; 
+if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) echo "<script> window.location.href = 'login.php' </script>";
 
 
-if(isset($_GET['user_id'])){
+if (isset($_GET['user_id'])) {
   $user_id = $_GET['user_id'];
 }
 
@@ -15,10 +16,7 @@ $sql = mysqli_query($connection, "SELECT * FROM users where id = '$user_id'");
 
 $fetch = mysqli_fetch_array($sql);
 
-use PHPMailer\PHPMailer\PHPMailer; 
-use PHPMailer\PHPMailer\Exception;
-require 'vendor/autoload.php';
-$mail = new PHPMailer(true);
+
 
 
 ?>
@@ -30,7 +28,7 @@ $mail = new PHPMailer(true);
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
   <title>Create A Users</title>
- 
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
 
@@ -76,8 +74,8 @@ $mail = new PHPMailer(true);
   </script>
   <!-- Custom notification for demo -->
   <!-- beautify ignore:end -->
-   <script src="<?php echo $domain ?>app/assets/js/jquery-3.6.0.min.js"></script>
-     <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?php echo $domain ?>admin/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo $domain ?>admin/assets/js/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -219,36 +217,20 @@ $mail = new PHPMailer(true);
                   </div>
                   <div class="card-body">
                     <?php
-                      if (isset($_POST['send'])) {
-                        
-                        $email = mysqli_real_escape_string($connection, $_POST['email']); 
-                        $subject = mysqli_real_escape_string($connection, $_POST['subject']);
-                        
-                        $email_body = mysqli_real_escape_string($connection, $_POST['email_body']);
+                    if (isset($_POST['send'])) {
 
-                        try {
-                                $mail->SMTPDebug = 2;                                   
-                                $mail->isSMTP();                                            
-                                $mail->Host  = 'server344-1.web-hosting.com';                 
-                                $mail->SMTPAuth = true;                         
-                                $mail->Username = 'support@aximtradepro.com';               
-                                $mail->Password = 'aximtradePas32';                       
-                                $mail->SMTPSecure = 'ssl';                          
-                                $mail->Port  = 465;
-                                // $mail->protocol = "mail";
-                                // $config['smtp_port'] = 465;
-                                $mail->SMTPDebug  = 0; 
-                            
-                                $mail->setFrom('support@aximtradepro.com', 'Aximtrade');    
-                                $mail->addAddress($email);
-                                
-                                $mail->isHTML(true);                                
-                                $mail->Subject = $subject;
-                                $mail->Body = "
+                      $email = mysqli_real_escape_string($connection, $_POST['email']);
+                      $subject = mysqli_real_escape_string($connection, $_POST['subject']);
+
+                      $email_body = mysqli_real_escape_string($connection, $_POST['email_body']);
+
+
+
+                      $body =  "
                                                <div class='container' style='height: fit-content; width: 100%; display: flex; align-items: center; justify-content: center; box-sizing: border-box'>
             
                                                    <div style='width:80%; margin:auto; padding:20px; background: gold; box-sizing: border; text-align: center'>
-                                                        <img src='https://aximtradepro.com/Aximtrade%20Pro%20logo%20b.png' style='height: 80px; width: 200px; object-fit: contain; margin: 0 auto;'>
+                                                        
                                                         
                                                         <h3>Email: $email</h3>
                                                         <p>
@@ -259,17 +241,23 @@ $mail = new PHPMailer(true);
                                                         </p>
                                                         
                                                         
-                                                        <div style='text-align: center'> &copy; 2023 AXIMTRADEPRO </div>
+                                                        <div style='text-align: center'> &copy; 2023 $sitename </div>
                                                    </div>
                     
                                        </div> ";
-                                $mail->send(); 
-                        } catch (Exception $e) {
-                               echo "PMEr: {$mail->ErrorInfo}";
-                        }
-                        
-                        
+
+                      $emailSender =   smtpmailer($email, $siteemail, $sitename, $subject, $body);
+
+                      if ($emailSender) {
+                        echo "<script>
+            Swal.fire('Email Sent Successfully', 'You have successfully sent an email to this user.', 'success');
+          </script>";
+                      } else {
+                        echo "<script>
+            Swal.fire('Email Sending Failed', 'An error occurred while sending the email to the user.', 'error');
+          </script>";
                       }
+                    }
                     ?>
                     <form method="POST">
                       <input type="hidden" name="user_id" value="<?php echo $fetch['id'] ?>">
@@ -279,19 +267,19 @@ $mail = new PHPMailer(true);
                       </div>
                       <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Subject</label>
-                        <input type="text" class="form-control" name="subject" id="basic-default-fullname"  placeholder="Type subject" />
+                        <input type="text" class="form-control" name="subject" id="basic-default-fullname" placeholder="Type subject" />
                       </div>
-                      
-                      
+
+
                       <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Email body</label>
-                        <textarea placeholder="Message" name="email_body" class="form-control" rows="8" ></textarea>
+                        <textarea placeholder="Message" name="email_body" class="form-control" rows="8"></textarea>
                       </div>
-                      
-                      
-                      
-                        
-                      
+
+
+
+
+
                       <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to send email to this user >>> sure to proceed?')" name="send">SEND</button>
                     </form>
                   </div>

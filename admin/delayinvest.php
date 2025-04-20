@@ -270,8 +270,8 @@ include('../server/connection.php');
                           </td>
                           <td>
                             <div class="dropdown">
-                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                              <div class="dropdown-menu">
+                              <!-- <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                              <div class="dropdown-menu"> -->
                                 <!--<a class="dropdown-item" onclick="return confirm('Are you sure you want to add this 1')" href="<?php echo $_SERVER['PHP_SELF'] ?>?user_id=<?php echo $details['id'] ?>&add=1 day"><i class="bx bx-cog me-1"></i>Add 1 Day</a>-->
                                 <!--<a class="dropdown-item" onclick="return confirm('Are you sure you want to add this 2')" href="<?php echo $_SERVER['PHP_SELF'] ?>?user_id=<?php echo $details['id'] ?>&add=2 days"><i class="bx bx-cog me-1"></i>Add 2 Days</a>-->
                                 <!--<a class="dropdown-item" onclick="return confirm('Are you sure you want to add this 3')" href="<?php echo $_SERVER['PHP_SELF'] ?>?user_id=<?php echo $details['id'] ?>&add=3 days"><i class="bx bx-cog me-1"></i>Add 3 Days</a>-->
