@@ -5,6 +5,13 @@ define("USER", "tifkvkth_crypto");
 define("PASSWORD", "tifkvkth_crypto");
 define("DATABASE", "tifkvkth_crypto");
 
+
+// define("USER", "root");
+//     define("PASSWORD", "");
+//     define("DATABASE", "billz-crypto");
+
+
+
 $connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 
 
@@ -58,7 +65,7 @@ if ($sql) {
             }
         }
     } else {
-        echo "No investments found for user ID $user_id.";
+        echo "No investments found for user ID";
     }
 } else {
     // Handle query execution error

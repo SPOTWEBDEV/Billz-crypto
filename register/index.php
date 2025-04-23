@@ -168,10 +168,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </script>';
         exit;
     }
-
+$status = 0;
     // Prepare SQL query with placeholders to prevent SQL injection
-    $stmt = $connection->prepare("INSERT INTO users (email, user, name, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $email, $first_name, $last_name, $password);
+    $stmt = $connection->prepare("INSERT INTO users (email, user, name, password, status) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $email, $first_name, $last_name, $password, $status);
 
     // Execute the query
     if ($stmt->execute()) {

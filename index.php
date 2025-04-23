@@ -1,18 +1,18 @@
 <?php include('./server/connection.php') ?>
 <!DOCTYPE html>
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
-	<title>Real Profit Stock Trade | Reliable and Profitable Investment in Binary Options, Forex, Indices, CFD's</title>
+	<title> <?php echo $sitename ?></title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="description"
-		content="Real Profit Stock Trade is a true opportunity to earn on cryptocurrency/binary. Real Profit Stock Trade is a company formed by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today, the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in these markets.">
-	<meta name="author" content="Real Profit Stock Trade">
+		content=" <?php echo $sitename ?> is a true opportunity to earn on cryptocurrency/binary. <?php echo $sitename ?>is a company formed by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today, the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in these markets.">
+
 	<link rel="icon" href="image/favicon.png" sizes="32x32" type="image/png">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,6 +22,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="alert/css/animate.min.css">
 	<link rel="stylesheet" href="alert/css/fake-notification-min.css">
+	<script src="//code.jivosite.com/widget/k6TbFdVeWO" async></script>
+
 	<style type="text/css">
 		.logo {
 			height: 55px;
@@ -97,14 +99,14 @@
 				<div class="logo" style="display: flex; align-items: center; gap: 4px;">
 					<img class="logo hidden-xs" src="image/logo.png">&nbsp;
 					<div>
-						<p style="font-size: 20px; font-weight: bolder; color: white; line-height: 24px;">Trust Asset <br>
-							Management</p>
+						<p style="font-size: 20px; font-weight: bolder; color: white; line-height: 24px;">Prime Forex <br>
+							Sphere</p>
 					</div>
 				</div>
 			</a>
 			<a class="__tL" href="<?php echo $domain ?>register">REGISTER</a>
 			<a class="__tL" href="<?php echo $domain ?>login">LOGIN</a>
-		
+
 
 		</div>
 	</div>
@@ -176,7 +178,7 @@
 
 	</div>
 
-	<h2 class="_seg____header__">HOW Real Profit Stock Trade WORKS?</h2>
+	<h2 class="_seg____header__">HOW PRIME FOREX SPHERE WORKS?</h2>
 
 	<div class="_in_content_">
 
@@ -878,7 +880,7 @@
 
 			<div class="foot_side___">
 				<h1 class="_seg____htxt_" style="color: #FFF;">Most innovative binary option platform</h1>
-				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Real Profit Stock Trade is a company formed
+				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Prime Forex Sphere Trade is a company formed
 					by a team of PROFESSIONAL TRADERS with EXPERTISE in one of the biggest financial markets of today,
 					the CRYPTOCURRENCY/BINARY. Our focus is to provide our affiliates with daily and constant profits in
 					these markets.</div>
@@ -896,10 +898,7 @@
 
 			<div class="foot_side___">
 				<h1 class="_seg____htxt_" style="color: #FFF;">Risk Warning</h1>
-				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Real Profit Stock Trade is one of the
-					leading platforms in the United States offering binary options, Forex and spreads. Regulated by the
-					CFTC and located in Houston, Texas. It is also regulated by the IFSC of Belize, as well as the Cyprus
-					Securities and Exchange Commission.</div>
+				<div class="_txt___" style="font-size: inherit; color: #b7b6b6;">Prime Forex Sphere Trade is one of the leading platforms in the United States & South Africa offering binary options, Forex and spreads. Regulated by the CFTC and located in Houston, Texas, London. It is also regulated by the IFSC of Belize, as well as the Cyprus and England Securities and Exchange Commission.</div>
 			</div>
 
 			<div class="foot_side___">
@@ -907,9 +906,17 @@
 				<p class="_txt___ _cLink">Address: <span
 						style="font-size: inherit; color: #f7931a; text-transform: capitalize;">Houston, Texas
 						USA</span></p>
-				<p class="_txt___ _cLink">Email: <a href="cdn-cgi/l/email-protection.html#e4de979194948b9690a49681858894968b828d9097908b878f9096858081ca878b89" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
+<<<<<<< HEAD
+				<!-- <p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
+				</p> -->
+				<!-- <p id="wa-number" class="_txt___ _cLink">Whatsapp: </p> -->
+				<p id="wa-number" class="_txt___ _cLink">Email: <?php echo $siteemail?></p>
+=======
+				<p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail ?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
 				</p>
-				<p id="wa-number" class="_txt___ _cLink">Whatsapp: </p>
+
+>>>>>>> 758de2a6e25e090ba2d0f05b91f41b341fd754d0
+
 			</div>
 		</div>
 
@@ -926,7 +933,7 @@
 					You are granted limited non-exclusive non-transferable rights to use the IP provided on this website
 					for personal and non-commercial purposes in relation to the services offered on the Website only.
 				</span>
-				<span style="color: #FFF;">Real Profit Stock Trade, &copy; 2013 - 2023</span>
+				<span style="color: #FFF;">Prime Forex SPhere Trade, &copy; 2013 - 2025</span>
 			</center>
 
 		</div>
@@ -963,12 +970,12 @@
 		$(document).ready(function() {
 			$('#notification-1').Notification({
 				// Notification varibles
-				Varible1: ["Dirk", "Johnny", "Watkin ", "Alejandro", "Vina", "Tony", "Ahmed", "Jackson", "Noah", "Aiden", "Darren", "Isabella", "Aria", "John", "Greyson", "Peter", "Mohammed", "William",
-					"Lucas", "Amelia", "Mason", "Mathew", "Richard", "Chris", "Mia", "Oliver"
+				Varible1: ["Thabo", "Sipho", "Mpho", "Kagiso", "Lerato", "Banele", "Sibusiso", "Themba", "Nomvula", "Lindiwe",
+					"Andile", "Nkosinathi", "Zanele", "Mandisa", "Siyabonga", "Dineo", "Tsepo", "Tumi", "Nandi", "Ayanda",
+					"Khanyisile", "Boitumelo", "Hlengiwe", "Phumlani", "Vusi", "Thandeka", "Mandla", "Gugu", "Jabulani"
 				],
-				Varible2: ["USA", "UAE", "ITALY", "FLORIDA", "MEXICO", "INDIA", "CHINA", "CAMBODIA", "UNITED KINGDOM", "GERMANY", "AUSTRALIA", "BANGLADESH", "SWEDEN", "PAKISTAN", "MALDIVES", "SEYCHELLES",
-					"BOLIVIA",
-					"SOUTH AFRICA", "ZAMBIA", "ZIMBABWE", "LEBANESE", "SAUDI ARABIA", "CHILE", "PEUTO RICO"
+				Varible2: ["South Africa", "Namibia", "Botswana", "Zimbabwe", "Mozambique", "Lesotho", "Eswatini", "Angola",
+					"Malawi", "Zambia", "Tanzania", "DR Congo", "Madagascar"
 				],
 
 				Amount: [1000, 2500, 5550, 6660, 4454, 3833, 6969],

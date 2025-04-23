@@ -37,8 +37,7 @@ if ($resultpromo) {
 
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light"
-    data-menu-styles="dark" data-toggled="close">
+<html lang="en" data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 
 <head>
     <!-- Meta Data -->
@@ -71,13 +70,13 @@ if ($resultpromo) {
 
     <meta name="google" content="notranslate">
     <script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            includedLanguages: 'en,es,fr,de,it', // Add the languages you want to support
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-    }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it', // Add the languages you want to support
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
@@ -132,13 +131,13 @@ if ($resultpromo) {
                                     class="p-4 d-flex gap-3 border-bottom border-block-end-dashed">
 
                                     <style>
-                                    .link {
-                                        color: rgb(0, 85, 255);
-                                    }
+                                        .link {
+                                            color: rgb(0, 85, 255);
+                                        }
 
-                                    .link:hover {
-                                        text-decoration: underline;
-                                    }
+                                        .link:hover {
+                                            text-decoration: underline;
+                                        }
                                     </style>
 
                                     <div class="text-muted">
