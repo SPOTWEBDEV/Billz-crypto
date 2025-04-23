@@ -1,6 +1,6 @@
 <?php
 include('../server/connection.php');
-// include('controllers/authFy.php');
+include('controllers/authFy.php');
 // PREPARE USERS DETAILS;
 include('controllers/userDetails.php');
 
@@ -47,6 +47,10 @@ $user_identity = $userDetails['id'];
     <link rel="stylesheet" href="./assets/libs/choices.js/public/assets/styles/choices.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -84,9 +88,9 @@ $user_identity = $userDetails['id'];
         $datebirth = mysqli_real_escape_string($connection, $_POST['datebirth']);
         $city = mysqli_real_escape_string($connection, $_POST['city']);
         $country = mysqli_real_escape_string($connection, $_POST['country']);
-        $whoislogin = $_SESSION['id'];
 
-        $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$whoislogin' AND (`status`='pending' OR `status`='approved')");
+
+        $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$user_identity' AND (`status`='pending' OR `status`='approved')");
 
         if (mysqli_num_rows($check)) {
             $message = "You already applied for KYC";
@@ -114,12 +118,12 @@ $user_identity = $userDetails['id'];
                     $image = basename($_FILES["fileToUpload"]["name"]);
 
 
-                    $insert = mysqli_query($connection, "INSERT INTO `kyc`(`user_id`, `firstname`, `lastname`, `email`, `phonenumber`, `datebirth`, `drivinglincense`, `city`, `country`) VALUES ('$whoislogin','$firstname','$lastname','$email','$phonenumber','$datebirth','$image','$city','$country')");
+                    $insert = mysqli_query($connection, "INSERT INTO `kyc`(`user_id`, `firstname`, `lastname`, `email`, `phonenumber`, `datebirth`, `drivinglincense`, `city`, `country`) VALUES ('$user_identity','$firstname','$lastname','$email','$phonenumber','$datebirth','$image','$city','$country')");
                     if ($insert) {
                         $message = "Successfully submitted your KYC";
                         echo "<script>showToast('$message', 'green');</script>";
                     } else {
-                        echo "<script>alert('fnfnfn');</script>";
+
                         $message = "Error Occurs .....";
                         echo "<script>showToast('$message', 'red');</script>";
                     }
@@ -184,81 +188,113 @@ $user_identity = $userDetails['id'];
                 </div>
                 <!-- Page Header Close -->
                 <!-- Start::row-1 -->
-                <form method="POST" class="row" enctype="multipart/form-data">
-                    <div class="col-xl-6">
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Personal-information</div>
+                <?php
+                $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$user_identity'");
+
+                if (mysqli_num_rows($check)) {
+                    $rowCheck = mysqli_fetch_assoc($check);
+
+                    $status = $rowCheck['status'];
+
+
+                    if ($status == 'pending') { ?>
+                        <p style="color: green;">Your KYC verification is pending</p>
+                    <?php } 
+                    else if ($status == 'approved') { ?>
+                            <p style="color: green;">You Already Done Your KYC</p>
+
+                    <?php }else{ ?>
+                        <h3 style="color: red;">Your KYC verification was declined</h3>
+                    <?php }
+
+
+
+
+                } else { ?>
+
+                    <form method="POST" class="row" enctype="multipart/form-data">
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Personal-information</div>
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Firstname</label>
+                                    <input type="text" name="firstname" class="form-control form-control-sm" id="" placeholder="john doe">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Lastname</label>
+                                    <input type="text" name="lastname" class="form-control form-control-sm" id="" placeholder="john doe">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Email</label>
+                                    <input type="text" name="email" class="form-control form-control-sm" id="" placeholder="johndoe@gmail.com">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Phonenumber</label>
+                                    <input type="text" name="phonenumber" class="form-control form-control-sm" id="" placeholder="+413 654 765">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Date-birth</label>
+                                    <input type="datetime-local" name="datebirth" class="form-control form-control-sm" id="">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Any Valid ID</label>
+                                    <input type="file" name="fileToUpload" class="form-control form-control-sm" id="formFileSm">
+                                </div>
+
+
+
                             </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Firstname</label>
-                                <input type="text" name="firstname" class="form-control form-control-sm" id="" placeholder="john doe">
-                            </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Lastname</label>
-                                <input type="text" name="lastname" class="form-control form-control-sm" id="" placeholder="john doe">
-                            </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Email</label>
-                                <input type="text" name="email" class="form-control form-control-sm" id="" placeholder="johndoe@gmail.com">
-                            </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Phonenumber</label>
-                                <input type="text" name="phonenumber" class="form-control form-control-sm" id="" placeholder="+413 654 765">
-                            </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Date-birth</label>
-                                <input type="datetime-local" name="datebirth" class="form-control form-control-sm" id="">
-                            </div>
-
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Any Valid ID</label>
-                                <input type="file" name="fileToUpload" class="form-control form-control-sm" id="formFileSm">
-                            </div>
-
-
-
                         </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div action="./controllers/uploadPassport.php" method="POST" enctype="multipart/form-data" class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Address-information</div>
-                            </div>
+                        <div class="col-xl-6">
+                            <div action="./controllers/uploadPassport.php" method="POST" enctype="multipart/form-data" class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Address-information</div>
+                                </div>
 
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">City</label>
-                                <input type="text" name="city" class="form-control form-control-sm" id="" placeholder="cape-town">
-                            </div>
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">City</label>
+                                    <input type="text" name="city" class="form-control form-control-sm" id="" placeholder="cape-town">
+                                </div>
 
-                            <div class="card-body">
-                                <label for="formFileSm" class="form-label">Country</label>
-                                <input type="text" name="country" class="form-control form-control-sm" id="" placeholder="American">
-                            </div>
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Country</label>
+                                    <input type="text" name="country" class="form-control form-control-sm" id="" placeholder="American">
+                                </div>
 
-                            <div class="card-body">
-                                <button class="btn btn-primary" name="kyc_btn" type="submit">Summit</button>
-                            </div>
+                                <div class="card-body">
+                                    <button class="btn btn-primary" name="kyc_btn" type="submit">Summit</button>
+                                </div>
 
 
-                            <!-- <div class="card-body">
+                                <!-- <div class="card-body">
                                     <span class="badge bg-secondary-transparent px-3 py-3">UPLOADED</span>
                                 </div> -->
 
 
-                            <!-- <div class="card-body">
+                                <!-- <div class="card-body">
                                     <span class="badge bg-warning-transparent px-3 py-3">PENDING</span>
                                 </div> -->
 
+                            </div>
                         </div>
-                    </div>
 
-                </form>
+                    </form>
+
+                <?php }
+
+                ?>
+
+
+
+
 
                 <!--End::row-1 -->
             </div>
@@ -355,6 +391,7 @@ $user_identity = $userDetails['id'];
     <script src="./assets/js/custom-switcher.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/wallet.js"></script>
 
 </body>
 

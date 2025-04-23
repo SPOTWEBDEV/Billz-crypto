@@ -148,6 +148,7 @@ function formatNumber($number, $decimals = 2)
     <script src="./assets/js/custom-switcher.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/wallet.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 

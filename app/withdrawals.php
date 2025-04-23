@@ -57,6 +57,10 @@ function formatNumber($number, $decimals = 2) {
     <link rel="stylesheet" href="./assets/libs/@simonwep/pickr/themes/nano.min.css" />
     <!-- Choices Css -->
     <link rel="stylesheet" href="./assets/libs/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -106,7 +110,7 @@ function formatNumber($number, $decimals = 2) {
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = mysqli_query($connection, "SELECT * FROM `withdrawals` WHERE `user_id` = '$id'");
+                                $sql = mysqli_query($connection, "SELECT * FROM withdrawals,users WHERE withdrawals.user_id = '$id' and users.id = '$id' ");
                                 if (mysqli_num_rows($sql)) {
                                     $count = 1;
                                     while ($details = mysqli_fetch_assoc($sql)) {
@@ -116,7 +120,7 @@ function formatNumber($number, $decimals = 2) {
                                             <td>
                                                 <span class="avatar avatar-xs me-2 online avatar-rounded">
                                                     <img src="./assets/images/faces/13.jpg" alt="img">
-                                                </span><?php echo $_SESSION['name'] ?>
+                                                </span><?php  echo $details['name'] ?>
                                                 <!-- <th scope="row">Harshrath</th> -->
                                             </td>
                                             <td><span class="badge bg-success-transparent">$<?php echo formatNumber($details['amount']) ?></span></td>
@@ -179,6 +183,7 @@ function formatNumber($number, $decimals = 2) {
     <script src="./assets/js/custom-switcher.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/wallet.js"></script>
 </body>
 
 </html>

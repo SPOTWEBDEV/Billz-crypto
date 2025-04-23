@@ -136,12 +136,12 @@ if ($resultres) {
 
                                 if ($result && $deposit &&  $sql) {
 
-                                    $url = $domain . '../withdrawals.php';
+                                    $url = $domain . 'app/withdrawals.php';
 
 
                                     echo "<script> 
                                 Swal.fire('Withdrawal Request','Withdrawal request recieved and will be Processed','success')
-                                setTimeout(()=> { window.location.href = './index.php'},1300)
+                                setTimeout(()=> { window.location.href = '$url'},1300)
                                 </script>";
                                 }
                             } else {

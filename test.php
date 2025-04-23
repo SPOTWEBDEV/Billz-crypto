@@ -6,18 +6,21 @@ include('controllers/userDetails.php');
 
 // Log out the mother force;
 include('controllers/logOut.php');
+
+$user_identity = $userDetails['id'];
+
 ?>
 
+
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
-<html data-theme-mode='dark'  data-header-styles='dark' data-menu-styles='dark'  >
+<html data-theme-mode='dark' data-header-styles='dark' data-menu-styles='dark'>
 
 <head>
     <!-- Meta Data -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ADD INVESTMENT</title>
+    <title>KYC</title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template" />
     <meta name="Author" content="Spruko Technologies Private Limited" />
     <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit." />
@@ -42,9 +45,115 @@ include('controllers/logOut.php');
     <link rel="stylesheet" href="./assets/libs/@simonwep/pickr/themes/nano.min.css" />
     <!-- Choices Css -->
     <link rel="stylesheet" href="./assets/libs/choices.js/public/assets/styles/choices.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function showToast(message, backgroundColor) {
+        Toastify({
+            text: message,
+            duration: 5000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: backgroundColor,
+            stopOnFocus: true,
+            className: "custom-toast",
+            style: {
+                borderRadius: "10px",
+                boxShadow: "5px 2px 40px -14px black",
+                color: "#fff",
+                fontWeight: "bolder",
+                fontFamily: "calibri"
+            }
+        }).showToast();
+    }
+</script>
+
+
+
 <body>
+    <?php
+    if (isset($_POST['kyc_btn'])) {
+
+        $firstname = mysqli_real_escape_string($connection, $_POST['firstname']);
+        $lastname = mysqli_real_escape_string($connection, $_POST['lastname']);
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $phonenumber = mysqli_real_escape_string($connection, $_POST['phonenumber']);
+        $datebirth = mysqli_real_escape_string($connection, $_POST['datebirth']);
+        $city = mysqli_real_escape_string($connection, $_POST['city']);
+        $country = mysqli_real_escape_string($connection, $_POST['country']);
+
+
+        $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$user_identity' AND (`status`='pending' OR `status`='approved')");
+
+        if (mysqli_num_rows($check)) {
+            $message = "You already applied for KYC";
+            echo "<script>showToast('$message', 'red');</script>";
+        } else {
+
+            $target_dir = "../uploads/kyc/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+            // echo  $firstname . '=>' . $lastname . '=>'. $email .'=>' . $phonenumber . '=>'  .  $datebirth . '=>' . $city . '=>' . $country . '=>' . $whoislogin; ;
+
+
+
+            if (
+                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif"
+            ) {
+
+                $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "<script>showToast('$message', 'red');</script>";
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+                    $image = basename($_FILES["fileToUpload"]["name"]);
+
+
+                    $insert = mysqli_query($connection, "INSERT INTO `kyc`(`user_id`, `firstname`, `lastname`, `email`, `phonenumber`, `datebirth`, `drivinglincense`, `city`, `country`) VALUES ('$user_identity','$firstname','$lastname','$email','$phonenumber','$datebirth','$image','$city','$country')");
+                    if ($insert) {
+                        $message = "Successfully submitted your KYC";
+                        echo "<script>showToast('$message', 'green');</script>";
+                    } else {
+
+                        $message = "Error Occurs .....";
+                        echo "<script>showToast('$message', 'red');</script>";
+                    }
+                } else {
+                    $message = "Sorry, there was an error uploading your file.";
+                    echo "<script>showToast('$message', 'red');</script>";
+                }
+            }
+        }
+    }
+
+    function showToast($message, $backgroundColor)
+    {
+        echo '<script>
+            const customToast = Toastify({
+                text: "' . $message . '",
+                duration: 5000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "' . $backgroundColor . '",
+                stopOnFocus: false,
+                className: "custom-toast",
+                style: {
+                    borderRadius: "10px",
+                    boxShadow: "5px 2px 40px -14px black",
+                    color: "#fff",
+                    fontWeight: "bolder",
+                    fontFamily: "calibri"
+                }
+            }).showToast();
+          </script>';
+    }
+
+    ?>
     <!-- Start Switcher -->
     <?php include('./includes/switcher.php') ?>
     <!-- End Switcher -->
@@ -54,19 +163,20 @@ include('controllers/logOut.php');
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
         <?php include('./includes/sidebar.php') ?>
+
         <!-- End::app-sidebar -->
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
                 <!-- Page Header -->
                 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-                    <h1 class="page-title fw-semibold fs-18 mb-0">Investment</h1>
+                    <h1 class="page-title fw-semibold fs-18 mb-0">KYC</h1>
                     <div class="ms-md-1 ms-0">
                         <nav>
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Investment
+                                    kyc
                                 </li>
                             </ol>
                         </nav>
@@ -74,319 +184,178 @@ include('controllers/logOut.php');
                 </div>
                 <!-- Page Header Close -->
                 <!-- Start::row-1 -->
+                <?php
+                $check = mysqli_query($connection, "SELECT * FROM `kyc` WHERE `user_id`='$user_identity'");
 
-                <div class="row">
+                if (mysqli_num_rows($check)) {
+                    $rowCheck = mysqli_fetch_assoc($check);
 
-                    <form action="./controllers/investCTR.php" method="POST" class="col-xxl-3 col-sm-6">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between mb-4">
-                                    <div class="flex-fill d-flex align-items-top">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md text-secondary border bg-light"><i class="ti ti-user-circle fs-18"></i></span>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <p class="fw-semibold fs-14 mb-0"> BASIC PLAN</p>
-                                            <p class="mb-0 text-muted fs-12 op-7">3 days</p>
-                                        </div>
-                                    </div>
+                  $status = $rowCheck['status'];
+
+
+                if ($status == 'pending') { ?>
+                    <p style="color: green;">You Already Done Your KYC</p>
+                    <?php } 
+                else if ($status == 'approved') { ?>
+
+                    <form method="POST" class="row" enctype="multipart/form-data">
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Personal-information</div>
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Firstname</label>
+                                    <input type="text" name="firstname" class="form-control form-control-sm" id="" placeholder="john doe">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Lastname</label>
+                                    <input type="text" name="lastname" class="form-control form-control-sm" id="" placeholder="john doe">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Email</label>
+                                    <input type="text" name="email" class="form-control form-control-sm" id="" placeholder="johndoe@gmail.com">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Phonenumber</label>
+                                    <input type="text" name="phonenumber" class="form-control form-control-sm" id="" placeholder="+413 654 765">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Date-birth</label>
+                                    <input type="datetime-local" name="datebirth" class="form-control form-control-sm" id="">
+                                </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Any Valid ID</label>
+                                    <input type="file" name="fileToUpload" class="form-control form-control-sm" id="formFileSm">
                                 </div>
 
 
-                                <input type="hidden" name="plan" value="basic Plan">
-                                <input type="hidden" name="percent" value="50">
-                                <input type="hidden" name="duration" value="3 days">
-                                <input type="hidden" name="email" value="<?php echo $userDetails['email'] ?>">
-                                <label for="input-label" class="form-label">Plan Amount</label>
-                                <div class="d-flex align-items-center mb-0">
-                                    <p class="mb-0 fs-20 fw-semibold">$100</p>
-                                    
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ms-3"> <span class="fs-12 text-muted">50%</span> </div>
-                                </div>
-                                <input type="text" name="amount" onkeyup="checkstarter(this)" placeholder="Enter Amount" class="form-control" id="input-label">
-                                <p class="text-danger"></p>
-                                <div class="form-floating mt-3">
-                                    <button class="btn btn-secondary" id="checkbasic_btn" onclick="return confirm('SURE TO ACTIVATE')" style="width: 100%" name="makeInvestment" type="submit" disabled>ACTIVATE</button>
-                                </div>
+
                             </div>
                         </div>
-                        <script>
-                            const btnchild = document.querySelector('#checkbasic_btn');
-
-                            function checkstarter(amount) {
-
-
-                                const error = amount.nextElementSibling;
-                                if (amount.value == 100 ) {
-                                    btnchild.removeAttribute("disabled");
-                                    error.innerHTML = '';
-                                } else {
-                                    btnchild.setAttribute("disabled", "");
-                                    error.innerHTML = 'Amount range Missmatch';
-                                }
-                            }
-                        </script>
-                    </form>
-                    <form action="./controllers/investCTR.php" method="POST" class="col-xxl-3 col-sm-6">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between mb-4">
-                                    <div class="flex-fill d-flex align-items-top">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md text-secondary border bg-light"><i class="ti ti-user-circle fs-18"></i></span>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <p class="fw-semibold fs-14 mb-0">SILVER PLAN</p>
-                                            <p class="mb-0 text-muted fs-12 op-7">3 days</p>
-                                        </div>
-                                    </div>
-
+                        <div class="col-xl-6">
+                            <div action="./controllers/uploadPassport.php" method="POST" enctype="multipart/form-data" class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Address-information</div>
                                 </div>
 
-                                <input type="hidden" name="plan" value="silver Plan">
-                                <input type="hidden" name="percent" value="50">
-                                <input type="hidden" name="duration" value="3 days">
-                                <input type="hidden" name="email" value="<?php echo $userDetails['email'] ?>">
-                                <label for="input-label" class="form-label">Plan Amount</label>
-                                <div class="d-flex align-items-center mb-0">
-                                    <p class="mb-0 fs-20 fw-semibold">$200</p>
-                                    
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">City</label>
+                                    <input type="text" name="city" class="form-control form-control-sm" id="" placeholder="cape-town">
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ms-3"> <span class="fs-12 text-muted">50</span> </div>
+
+                                <div class="card-body">
+                                    <label for="formFileSm" class="form-label">Country</label>
+                                    <input type="text" name="country" class="form-control form-control-sm" id="" placeholder="American">
                                 </div>
-                                <input type="text" name="amount" onkeyup="standard(this)" class="form-control" id="input-label" placeholder="Enter Amount">
-                                <p class="text-danger"></p>
-                                <div class="form-floating mt-3">
-                                    <button class="btn btn-secondary" id="standard_btn" onclick="return confirm('CONFIRM TO ACTIVATE')" style="width: 100%" name="makeInvestment" type="submit" disabled>ACTIVATE</button>
+
+                                <div class="card-body">
+                                    <button class="btn btn-primary" name="kyc_btn" type="submit">Summit</button>
                                 </div>
+
+
+                                <!-- <div class="card-body">
+                                    <span class="badge bg-secondary-transparent px-3 py-3">UPLOADED</span>
+                                </div> -->
+
+
+                                <!-- <div class="card-body">
+                                    <span class="badge bg-warning-transparent px-3 py-3">PENDING</span>
+                                </div> -->
+
                             </div>
                         </div>
-                        <script>
-                            const btnStandard = document.querySelector('#standard_btn');
 
-                            function standard(amount) {
-
-
-                                const error = amount.nextElementSibling;
-                                if (amount.value == 200 ) {
-                                    btnStandard.removeAttribute("disabled");
-                                    error.innerHTML = '';
-                                } else {
-                                    btnStandard.setAttribute("disabled", "");
-                                    error.innerHTML = 'Amount range Error';
-                                }
-                            }
-                        </script>
-                    </form>
-                    <form action="./controllers/investCTR.php" method="POST" class="col-xxl-3 col-sm-6">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between mb-4">
-                                    <div class="flex-fill d-flex align-items-top">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md text-secondary border bg-light"><i class="ti ti-user-circle fs-18"></i></span>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <p class="fw-semibold fs-14 mb-0"> GOLD PLAN</p>
-                                            <p class="mb-0 text-muted fs-12 op-7">3 days</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <input type="hidden" name="plan" value="gold Plan">
-                                <input type="hidden" name="percent" value="50">
-                                <input type="hidden" name="duration" value="3 days">
-                                <input type="hidden" name="email" value="<?php echo $userDetails['email'] ?>">
-                                <label for="input-label" class="form-label">Plan Amount</label>
-                                <div class="d-flex align-items-center mb-0">
-                                    <p class="mb-0 fs-20 fw-semibold">$500</p>
-                                    
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ms-3"> <span class="fs-12 text-muted">50%</span> </div>
-                                </div>
-                                <input type="text" name="amount" onkeyup="Advance(this)" placeholder="Enter Amount" class="form-control" id="input-label">
-                                <p class="text-danger"></p>
-                                <div class="form-floating mt-3">
-                                    <button class="btn btn-secondary" id="btnSecondary" onclick="return confirm('SURE TO ACTIVATE')" style="width: 100%" name="makeInvestment" type="submit" disabled>ACTIVATE</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            const btnSecondary = document.querySelector('#btnSecondary');
-
-                            function Advance(amount) {
-                                const error = amount.nextElementSibling;
-                                if (amount.value == 500) {
-                                    btnSecondary.removeAttribute("disabled");
-                                    error.innerHTML = '';
-                                } else {
-                                    btnSecondary.setAttribute("disabled", "");
-                                    error.innerHTML = 'Amount range Missmatch';
-                                }
-                            }
-                        </script>
-                    </form>
-                    <form action="./controllers/investCTR.php" method="POST" class="col-xxl-3 col-sm-6">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between mb-4">
-                                    <div class="flex-fill d-flex align-items-top">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md text-secondary border bg-light"><i class="ti ti-user-circle fs-18"></i></span>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <p class="fw-semibold fs-14 mb-0">PLATINUM PLAN
-                                            </p>
-                                            <p class="mb-0 text-muted fs-12 op-7">3 days</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <input type="hidden" name="plan" value="Platinum Plan">
-                                <input type="hidden" name="percent" value="50">
-                                <input type="hidden" name="duration" value="3 days">
-                                <input type="hidden" name="email" value="<?php echo $userDetails['email'] ?>">
-                                <label for="input-label" class="form-label">Plan Amount</label>
-                                <div class="d-flex align-items-center mb-0">
-                                    <p class="mb-0 fs-20 fw-semibold">$1,000</p>
-                                    <span class="text-muted ms-2">
-                                        <i class="ti ti-arrow-up align-middle text-success me-1 d-inline-block"></i>
-                                    </span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ms-3"> <span class="fs-12 text-muted">50%</span> </div>
-                                </div>
-                                <input type="text" name="amount" onkeyup="Silvers(this)" placeholder="Enter Amount" class="form-control" id="input-label">
-                                <p class="text-danger"></p>
-                                <div class="form-floating mt-3">
-                                    <button class="btn btn-secondary" id="btnAdvanced" onclick="return confirm('SURE TO ACTIVATE')" style="width: 100%" name="makeInvestment" type="submit" disabled>ACTIVATE</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            const btnAdvanced = document.querySelector('#btnAdvanced');
-
-                            function Silvers(amount) {
-                                const error = amount.nextElementSibling;
-                                console.log(amount.value);
-                                console.log('expert');
-                                if (amount.value == 1000) {
-                                    btnAdvanced.removeAttribute("disabled");
-                                    error.innerHTML = '';
-                                } else {
-                                    btnAdvanced.setAttribute("disabled", "");
-                                    error.innerHTML = 'Amount range Missmatch';
-                                }
-                            }
-                        </script>
                     </form>
 
-                    <form action="./controllers/investCTR.php" method="POST" class="col-xxl-3 col-sm-6">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between mb-4">
-                                    <div class="flex-fill d-flex align-items-top">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md text-secondary border bg-light"><i class="ti ti-user-circle fs-18"></i></span>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <p class="fw-semibold fs-14 mb-0">PRIME PLAN
-                                            </p>
-                                            <p class="mb-0 text-muted fs-12 op-7">3 days</p>
-                                        </div>
-                                    </div>
+                <?php } else { ?>
+                    <p style="color: green;">You kyc verification was declined</p>
+                <?php }  ?>
+                }
+                
 
-                                </div>
+                
 
 
-                                <input type="hidden" name="plan" value="Platinum Plan">
-                                <input type="hidden" name="percent" value="50">
-                                <input type="hidden" name="duration" value="3 days">
-                                <input type="hidden" name="email" value="<?php echo $userDetails['email'] ?>">
-                                <label for="input-label" class="form-label">Plan Amount</label>
-                                <div class="d-flex align-items-center mb-0">
-                                    <p class="mb-0 fs-20 fw-semibold">$5,000</p>
-                                    <span class="text-muted ms-2">
-                                        <i class="ti ti-arrow-up align-middle text-success me-1 d-inline-block"></i>
-                                    </span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ms-3"> <span class="fs-12 text-muted">50%</span> </div>
-                                </div>
-                                <input type="text" name="amount" onkeyup="Silvers(this)" placeholder="Enter Amount" class="form-control" id="input-label">
-                                <p class="text-danger"></p>
-                                <div class="form-floating mt-3">
-                                    <button class="btn btn-secondary" id="btnAdvanced" onclick="return confirm('SURE TO ACTIVATE')" style="width: 100%" name="makeInvestment" type="submit" disabled>ACTIVATE</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            const btnAdvanced = document.querySelector('#btnAdvanced');
-
-                            function Silvers(amount) {
-                                const error = amount.nextElementSibling;
-                                console.log(amount.value);
-                                console.log('expert');
-                                if (amount.value == 5000) {
-                                    btnAdvanced.removeAttribute("disabled");
-                                    error.innerHTML = '';
-                                } else {
-                                    btnAdvanced.setAttribute("disabled", "");
-                                    error.innerHTML = 'Amount range Missmatch';
-                                }
-                            }
-                        </script>
-                    </form>
-                    
-                    
-
-
-
-                </div>
                 <!--End::row-1 -->
             </div>
         </div>
-        <!-- End::app-content -->
 
+        <!-- End::app-content -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <a href="javascript:void(0);" class="input-group-text" id="Search-Grid"><i class="fe fe-search header-link-icon fs-18"></i></a>
+                            <input type="search" class="form-control border-0 px-2" placeholder="Search" aria-label="Username" />
+                            <a href="javascript:void(0);" class="input-group-text" id="voice-search"><i class="fe fe-mic header-link-icon"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-light btn-icon" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fe fe-more-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-weight-semibold text-muted mb-2">
+                                Are You Looking For...
+                            </p>
+                            <span class="search-tags"><i class="fe fe-user me-2"></i>People<a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a></span>
+                            <span class="search-tags"><i class="fe fe-file-text me-2"></i>Pages<a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a></span>
+                            <span class="search-tags"><i class="fe fe-align-left me-2"></i>Articles<a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a></span>
+                            <span class="search-tags"><i class="fe fe-server me-2"></i>Tags<a href="javascript:void(0)" class="tag-addon"><i class="fe fe-x"></i></a></span>
+                        </div>
+                        <div class="my-4">
+                            <p class="font-weight-semibold text-muted mb-2">
+                                Recent Search :
+                            </p>
+                            <div class="p-2 border br-5 d-flex align-items-center text-muted mb-2 alert">
+                                <a href="notifications.html"><span>Notifications</span></a>
+                                <a class="ms-auto lh-1" href="javascript:void(0);" data-bs-dismiss="alert" aria-label="Close"><i class="fe fe-x text-muted"></i></a>
+                            </div>
+                            <div class="p-2 border br-5 d-flex align-items-center text-muted mb-2 alert">
+                                <a href="alerts.html"><span>Alerts</span></a>
+                                <a class="ms-auto lh-1" href="javascript:void(0);" data-bs-dismiss="alert" aria-label="Close"><i class="fe fe-x text-muted"></i></a>
+                            </div>
+                            <div class="p-2 border br-5 d-flex align-items-center text-muted mb-0 alert">
+                                <a href="mail.html"><span>Mail</span></a>
+                                <a class="ms-auto lh-1" href="javascript:void(0);" data-bs-dismiss="alert" aria-label="Close"><i class="fe fe-x text-muted"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group ms-auto">
+                            <button class="btn btn-sm btn-primary-light">Search</button>
+                            <button class="btn btn-sm btn-primary">Clear Recents</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="scrollToTop">
         <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
     </div>
     <div id="responsive-overlay"></div>
-    <!-- Popper JS -->
+    <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+
+
     <script src="./assets/libs/@popperjs/core/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="./assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -401,10 +370,16 @@ include('controllers/logOut.php');
     <script src="./assets/js/simplebar.js"></script>
     <!-- Color Picker JS -->
     <script src="./assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+    <!-- Apex Charts JS -->
+    <script src="./assets/libs/apexcharts/apexcharts.min.js"></script>
+    <!-- Crypto-Dashboard JS -->
+    <script src="./assets/js/crypto-dashboard.js"></script>
     <!-- Custom-Switcher JS -->
     <script src="./assets/js/custom-switcher.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/wallet.js"></script>
+
 </body>
 
 </html>

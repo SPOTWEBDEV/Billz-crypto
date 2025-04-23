@@ -583,26 +583,7 @@ function formatNumber($number, $decimals = 2)
                 </div>
             </div>
 
-            <!-- Smartsupp Live Chat script -->
-            <script type="text/javascript">
-                var _smartsupp = _smartsupp || {};
-                _smartsupp.key = 'dd2e30f3bf4bcfb67fad18366d36476fe3c2419b';
-                window.smartsupp || (function(d) {
-                    var s, c, o = smartsupp = function() {
-                        o._.push(arguments)
-                    };
-                    o._ = [];
-                    s = d.getElementsByTagName('script')[0];
-                    c = d.createElement('script');
-                    c.type = 'text/javascript';
-                    c.charset = 'utf-8';
-                    c.async = true;
-                    c.src = 'https://www.smartsuppchat.com/loader.js?';
-                    s.parentNode.insertBefore(c, s);
-                })(document);
-            </script>
-            <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
+        
 
 
             <?php
@@ -610,9 +591,7 @@ function formatNumber($number, $decimals = 2)
             ?>
 
         </div>
-        <section id="modelWapper">
-
-        </section>
+     
         <?php include('./includes/popin_with.php') ?>
         <!-- <div class="scrollToTop">
             <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
@@ -642,6 +621,7 @@ function formatNumber($number, $decimals = 2)
         <!-- Custom JS -->
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/wallet.js"></script>
+        
 </body>
 
 </html>

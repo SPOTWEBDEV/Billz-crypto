@@ -213,3 +213,5 @@ include('controllers/userDetails.php');
     </div>
     <!-- End::main-header-container -->
 </header>
+
+<section id="modelWapper"></section>
