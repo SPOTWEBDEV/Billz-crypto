@@ -244,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </form>
 
 
-        <p class="login-link">Already have an account? <a href="#">Login</a></p>
+        <p class="login-link">Already have an account? <a href="<?php echo $domain?>login/">Login</a></p>
     </div>
 
     <div class="language-selector">

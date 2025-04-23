@@ -241,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
             <button name="login_btn" class="register-btn">Login</button>
         </form>
 
-        <p class="login-link">If you have an account? <a href="<?php echo $domain?>register">Register</a></p>
+        <p class="login-link">If you have an account? <a href="<?php echo $domain?>register/">Register</a></p>
     </div>
 
     <div class="language-selector">
