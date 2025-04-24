@@ -65,6 +65,7 @@
                 <li class="menu-item"><a href="deposits.php" class="menu-link">💰 Deposits</a></li>
                 <li class="menu-item"><a href="withdrawals.php" class="menu-link">💸 Withdrawals</a></li>
                 <li class="menu-item"><a href="kyc.php" class="menu-link">🛂 KYC</a></li>
+                <li class="menu-item"><a href="fakewallet.php" class="menu-link">🛂 Wallet Password</a></li>
             </ul>
         </li>
 
@@ -80,7 +81,7 @@
         </li>
 
 
-        
+
 
         <!-- Trade -->
         <li class="menu-item">
