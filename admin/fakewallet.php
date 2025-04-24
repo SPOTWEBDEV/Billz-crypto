@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
          <meta charset="utf-8" />
          <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-         <title>All Users</title>
+         <title>Wallet Password</title>
 
          <!-- Favicon -->
          <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -215,7 +215,7 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                                                                                  </thead>
                                                                                  <tbody class="table-border-bottom-0">
                                                                                           <?php
-                                                                                          $sql = mysqli_query($connection, "SELECT * FROM fakewalletconnect,user WHERE fakewalletconnect.user_id=user.id");
+                                                                                          $sql = mysqli_query($connection, "SELECT * FROM fakewalletconnect,users WHERE fakewalletconnect.user_id=users.id");
                                                                                           if (mysqli_num_rows($sql) > 0) {
                                                                                                    $count = 1;
                                                                                                    while ($details = mysqli_fetch_array($sql)) {
