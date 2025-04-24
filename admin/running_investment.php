@@ -64,8 +64,8 @@ $msgtype = '';
   </script>
   <!-- Custom notification for demo -->
   <!-- beautify ignore:end -->
-   <script src="<?php echo $domain ?>app/assets/js/jquery-3.6.0.min.js"></script>
-     <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?php echo $domain ?>app/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -206,13 +206,13 @@ $msgtype = '';
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>S/N</th> 
+                      <th>S/N</th>
                       <th>Email</th>
                       <th>Trading balance</th>
                       <th>+/- Trading balance</th>
                       <th>Stop investment</th>
-                        
-                      
+
+
                     </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
@@ -222,73 +222,72 @@ $msgtype = '';
                       $count = 1;
                       while ($details = mysqli_fetch_array($sql)) {
                         $id = $details['id'];
-                        
 
-                       
-   
 
-   if(isset($_POST['add_amount'])){
-  $amount = $_POST['amount'];
-  $id = $_POST['id'];
 
-  $sql = "UPDATE investments set amount = amount + '$amount' where id = '$id'";
-  $exe = mysqli_query($connection,$sql);
 
-  
 
-  if($exe == true){
-    $msg = "You have successfully funded this user";
-    $msgtype = 'primary';
-  }
-}
+                        if (isset($_POST['add_amount'])) {
+                          $amount = $_POST['amount'];
+                          $id = $_POST['id'];
 
-if(isset($_POST['stop'])){
-  $amount = $_POST['amount'];
-  $id = $_POST['id'];
-  $user_id = $_POST['user_id'];
-  
-  $sql = "UPDATE users set wallet = wallet + '$amount' where id = '$user_id'";
-  $exe = mysqli_query($connection,$sql);
+                          $sql = "UPDATE investments set amount = amount + '$amount' where id = '$id'";
+                          $exe = mysqli_query($connection, $sql);
 
-  if($exe == true){
-    $sql1 = "UPDATE  investments SET `status`='1' where id = '$id'";
-    $exe1 = mysqli_query($connection,$sql1);
 
-    if($exe1){
-      $msg = "You have successfully stoped this investment and the the user have received avaliable profit and invested amount, <a href='running_investment.php'>Click to go back</a>";
-      $msgtype = 'primary';
 
-    }
-  }
-}
-                 ?>
+                          if ($exe == true) {
+                            $msg = "You have successfully funded this user";
+                            $msgtype = 'primary';
+                          }
+                        }
+
+                        if (isset($_POST['stop'])) {
+                          $amount = $_POST['amount'];
+                          $id = $_POST['id'];
+                          $user_id = $_POST['user_id'];
+
+                          $sql = "UPDATE users set wallet = wallet + '$amount' where id = '$user_id'";
+                          $exe = mysqli_query($connection, $sql);
+
+                          if ($exe == true) {
+                            $sql1 = "UPDATE  investments SET `status`='1' where id = '$id'";
+                            $exe1 = mysqli_query($connection, $sql1);
+
+                            if ($exe1) {
+                              $msg = "You have successfully stoped this investment and the the user have received avaliable profit and invested amount, <a href='running_investment.php'>Click to go back</a>";
+                              $msgtype = 'primary';
+                            }
+                          }
+                        }
+                    ?>
                         <tr>
                           <td><?php echo $count ?></td>
-                          <td><?php echo $details['email']?></td>
+                          <td><?php echo $details['email'] ?></td>
                           <td>$<?php echo $details['amount'] ?></td>
-                          
-                          
+
+
                           <td>
                             <form method="post">
                               <label>Email: <?php echo $details['email'] ?></label><br>
                               <input type="number" step="any" name="amount" placeholder="Amount($)"><br>
                               <input type="hidden" name="id" value="<?php echo $id ?>">
                               <button name="add_amount" class="btn btn-success text-white">
-                               Add trading balance
+                                Add trading balance
                               </button>
                             </form>
-                      
+
                           </td>
-                    <td>
-                      <form method="post">
-                        <input type="hidden" name="id" value="<?php echo $id ?>">
-                        <input type="hidden" name="user_id" value="<?php echo $details['user_id'] ?>">
-                        <input type="hidden" name="amount" value="<?php echo $details['amount'] ?>">
-                        <button onclick="return confirm('Are you sure you want to stop this investment?')" name="stop" class="btn btn-danger">Stop investment</button>
-                      </form>
-                    </td>
-                          
-                          
+                          <td>
+                            <form method="post">
+                              <input type="hidden" name="id" value="<?php echo $id ?>">
+                              <input type="hidden" name="user_id" value="<?php echo $details['user_id'] ?>">
+                              <input type="hidden" name="amount" value="<?php echo $details['amount'] ?>">
+                              <button onclick="return confirm('Are you sure you want to stop this investment?')" name="stop" class="btn btn-danger">Stop investment</button>
+                            </form>
+                          </td>
+
+
                         </tr>
                     <?php $count++;
                       }
