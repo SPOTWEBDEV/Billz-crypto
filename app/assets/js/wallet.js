@@ -207,6 +207,9 @@ const wallet = [{
 {
     name:"Coinbase",
     img:'coinbase.png'
+},{
+  name:'Phantom',
+  img:'Phantom.jpg'
 }
 ];
 
