@@ -57,7 +57,7 @@ if ($isLocalhost) {
 }
 
 // Site configurations
-$sitename = "Primefx Sphere";
+$sitename = "Quanstofy";
 
 // Email Config 
 $siteemail = "support@quanstofy.com";
