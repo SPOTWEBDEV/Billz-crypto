@@ -214,4 +214,4 @@ include('controllers/userDetails.php');
     <!-- End::main-header-container -->
 </header>
 
-<section id="modelWapper"></section>
+<section id="modelWapper" auth="<?php echo $_SESSION['logged_in'] ?>"></section>
