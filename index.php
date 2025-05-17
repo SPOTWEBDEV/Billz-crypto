@@ -252,7 +252,7 @@
 					<img class="_seg___img a_simg_" src="image/award_13.png">
 					<div class="_side___ _b_side___">
 						<h1 class="_seg____htxt_" style="color: #FFF;">Century International Quality Gold ERA Award</h1>
-						<div class="_txt___" style="font-size: 17px;">The prestigious award was given to Real Profit Stock Trade in recognition of our outstanding commitment to Quality and Excellence, particularly
+						<div class="_txt___" style="font-size: 17px;">The prestigious award was given to <?php echo $sitename ?> in recognition of our outstanding commitment to Quality and Excellence, particularly
 							in the realm of Customer Satisfaction.</div>
 					</div>
 				</div>
@@ -272,7 +272,7 @@
 					<div class="_side___ _b_side___">
 						<h1 class="_seg____htxt_" style="color: #FFF;">Most Reliable Binary Options Broker</h1>
 						<div class="_txt___" style="font-size: 17px;">Our first priority is the security of our clients'
-							funds. This was recognized by the experts at MasterForex-V, who awarded Real Profit Stock Trade
+							funds. This was recognized by the experts at MasterForex-V, who awarded <?php echo $sitename ?>
 							the title of Most Trusted Binary Options Broker.</div>
 					</div>
 				</div>
@@ -284,7 +284,7 @@
 						</h1>
 						<div class="_txt___" style="font-size: 17px;">The Mobile Star Awards is the largest annual
 							mobile innovations and software awards program in the world. In 2016, the organization
-							honored the Real Profit Stock Trade trading app as the best in its category, praising its
+							honored the <?php echo $sitename ?> trading app as the best in its category, praising its
 							efficiency and impeccable design.</div>
 					</div>
 				</div>
@@ -293,7 +293,7 @@
 					<img class="_seg___img a_simg_" src="image/award_6.png">
 					<div class="_side___ _b_side___">
 						<h1 class="_seg____htxt_" style="color: #FFF;">World's Leading Binary Options Broker</h1>
-						<div class="_txt___" style="font-size: 17px;">At the same MasterForex-V Real Profit Stock Trade was
+						<div class="_txt___" style="font-size: 17px;">At the same MasterForex-V <?php echo $sitename ?> was
 							awarded for being the World's Leading Binary Options Broker. The perfection in our service
 							and product was recognized by the experts of the conference in 2014.</div>
 					</div>
@@ -304,7 +304,7 @@
 					<div class="_side___ _b_side___">
 						<h1 class="_seg____htxt_" style="color: #FFF;">Fastest growing binary option brand</h1>
 						<div class="_txt___" style="font-size: 17px;">Global Brands Magazine, Britain’s reputable brand
-							observer, awarded Real Profit Stock Trade along with a number of outstanding European brands —
+							observer, awarded <?php echo $sitename ?> along with a number of outstanding European brands —
 							an achievement worth working for.</div>
 					</div>
 				</div>
@@ -719,9 +719,9 @@
 					<div class="img-box"><img src="uploads/testimonies/thumb/0ca80a9740d2a5a7be4caeb6ea4f64bc.jpg"
 							alt=""></div>
 					<p class="testimonial">Hello everyone Investing is not the problem but getting the returns and
-						profits is where most of us have problems. I've been long in Real Profit Stock Trade.online, so I
+						profits is where most of us have problems. I've been long in <?php echo $sitename ?>.online, so I
 						know how it feels like to lose your money. I have lost my hard earned money on fake sites and
-						managers but thanks to Real Profit Stock Trade for helping me recover all. From investing to Real Profit Stock Trade
+						managers but thanks to <?php echo $sitename ?> for helping me recover all. From investing to <?php echo $sitename ?>
 						it's been automatic. If you're willing to earn Join today and invest and recover
 						all your lost is legit and certified.</p>
 					<p class="overview"><b>Brown </b></p>
@@ -740,7 +740,7 @@
 					<div class="img-box"><img src="uploads/testimonies/thumb/6b6f38b729a118f10ef528753e1f14fa.jpg"
 							alt=""></div>
 					<p class="testimonial">Truly the corona outbreak have really affected me a lot financially, but
-						because of the help of Real Profit Stock Trade in through this crypto investment am still
+						because of the help of <?php echo $sitename ?> in through this crypto investment am still
 						financially stable</p>
 					<p class="overview"><b>Melissa dororthy</b></p>
 					<div class="star-rating">
@@ -757,7 +757,7 @@
 				<div class="item carousel-item ">
 					<div class="img-box"><img src="uploads/testimonies/thumb/20aab71f88a53b30534b49407b1e61b4.jpg"
 							alt=""></div>
-					<p class="testimonial">I have become dept free since I started my trade with Real Profit Stock Trade and
+					<p class="testimonial">I have become dept free since I started my trade with <?php echo $sitename ?> and
 						I have earn over $10,000 and more still coming all thank this trading platform i have made so
 						much profits I made a withdraw of $25000 I'm so much excited at this moment.</p>
 					<p class="overview"><b>Glenda karina</b></p>
@@ -775,7 +775,7 @@
 				<div class="item carousel-item ">
 					<div class="img-box"><img src="uploads/testimonies/thumb/47cbbfcf351a84a2c74ba853146d9713.jpg"
 							alt=""></div>
-					<p class="testimonial">I want to say a big thank you to Real Profit Stock Trade, Just got my profit of
+					<p class="testimonial">I want to say a big thank you to <?php echo $sitename ?>, Just got my profit of
 						$7500 in my Bank account. This is indeed a trust worthy platform to invest</p>
 					<p class="overview"><b>Carly Jones</b></p>
 					<div class="star-rating">
@@ -793,7 +793,7 @@
 					<div class="img-box"><img src="uploads/testimonies/thumb/998bbc715738adbee6391aa77185ed78.jpg"
 							alt=""></div>
 					<p class="testimonial">Am Allen from North Carolina, Currently living in Arizona with my Family, i
-						came across Real Profit Stock Trade while browsing through facebook,
+						came across <?php echo $sitename ?> while browsing through facebook,
 						I accessed the site and contact them via whatsapp and i started investing with $5000 and am
 						making $51,560.00 Weekly.</p>
 					<p class="overview"><b>Allen Brewer</b></p>
