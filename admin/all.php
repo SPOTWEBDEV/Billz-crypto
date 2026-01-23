@@ -4,6 +4,98 @@ include('../server/connection.php');
 if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
   echo "<script> window.location.href = 'login.php'</script>";
 }
+
+
+
+if (isset($_POST['add_available_bal'])) {
+  $id = $_POST['id'];
+  $amount = $_POST['amount'];
+
+  $sql = mysqli_query($connection, "UPDATE users set wallet = wallet + '$amount' where id = '$id'");
+  if ($sql) {
+    echo "<script> Swal.fire('Done','You have successfully added available balance of this user','success')
+    
+                            setTimeout(()=>{
+                                window.open('./all.php','_self')
+                            },2000)
+                            
+                            </script>";
+  }
+}
+
+if (isset($_POST['add_trading_bal'])) {
+  $id = $_POST['id'];
+  $amount = $_POST['amount'];
+
+  $sql = mysqli_query($connection, "UPDATE users set gain_wallet = gain_wallet + '$amount' where id = '$id'");
+  if ($sql) {
+    echo "<script> Swal.fire('Done','You have successfully added trading balance of this user','success')
+                            
+                            setTimeout(()=>{
+                                window.open('./all.php','_self')
+                            },2000)
+                            
+                            </script>";
+  }
+}
+
+
+
+if (isset($_GET['suspend'])) {
+  $id = $_GET['user_id'];
+  $suspend = mysqli_query($connection, "UPDATE `users` SET `active` = '1' WHERE `id` = '$id'");
+  if ($suspend) {
+    echo "<script> Swal.fire('Great Job','You have suspended this account','success') </script>";
+    echo "<script> setTimeout( ()=> { window.open('suspends.php','_self') }, 2000) </script>";
+  } else {
+    echo "<script> Swal.fire('Failed','Error suspending this user','error') </script>";
+  }
+}
+if (isset($_GET['del'])) {
+  $id = $_GET['user_id'];
+  $suspend = mysqli_query($connection, "DELETE FROM `users` WHERE `id` = '$id'");
+  if ($suspend) {
+    echo "<script> Swal.fire('Great Job','You have deleted this account','success') </script>";
+    echo "<script>  setTimeout( ()=> { window.open('all.php','_self') }, 2000) </script>";
+  } else {
+    echo "<script> Swal.fire('Failed','Error suspending this user','error') </script>";
+  }
+}
+
+if (isset($_GET['msg'])) {
+  $_SESSION['msg_id'] = $_GET['user_id'];
+  $_SESSION['msg_person'] = $_GET['name'];
+  $_SESSION['msg_mail'] = $_GET['email'];
+  $_SESSION['mailing'] = true;
+  echo "<script> window.location.href = 'msg.php' </script>";
+}
+
+if (isset($_GET['mod'])) {
+  $_SESSION['bal_id'] = $_GET['user_id'];
+  $_SESSION['bal_person'] = $_GET['name'];
+  $_SESSION['bal'] = $_GET['bal'];
+  $_SESSION['moding'] = true;
+  echo "<script> window.location.href = 'mod_bal.php' </script>";
+}
+
+if (isset($_GET['profit'])) {
+  $_SESSION['profit_id'] = $_GET['user_id'];
+  $_SESSION['profit'] = $_GET['profit'];
+  $_SESSION['moding'] = true;
+  echo "<script> window.location.href = 'mod_profit.php' </script>";
+}
+
+if (isset($_GET['stop'])) {
+  $user_top_stop_id = $_GET['user_id'];
+  $stop_withdrawal = mysqli_query($connection, "UPDATE `users` SET `dn_with` = '1' WHERE `id` = '$user_top_stop_id' ");
+
+  if ($stop_withdrawal) {
+    echo "<script> Swal.fire('Done','This User Cant make withdrawals until enabled','success') </script>";
+    echo "<script>  setTimeout( ()=> { window.open('all.php','_self') }, 2000) </script>";
+  } else {
+    echo "<script> Swal.fire('Failed','Error stoping withdrawal for this user','error') </script>";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template-free">
@@ -47,8 +139,19 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
   <script src="assets/js/config.js"></script>
 
   <!-- beautify ignore:end -->
-   <script src="<?php echo $domain ?>app/assets/js/jquery-3.6.0.min.js"></script>
-     <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?php echo $domain ?>app/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo $domain ?>app/assets/js/sweetalert2.all.min.js"></script>
+
+  <style>
+    .user-name {
+      width: 300px;
+      max-width: 300px;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+  </style>
+
 
 </head>
 
@@ -184,192 +287,120 @@ if (!isset($_SESSION['admin_login_']) && $_SESSION['admin_login_'] != true) {
             <!-- Basic Bootstrap Table -->
             <div class="card">
               <h5 class="card-header">All Registered users</h5>
+
+              <!-- SEARCH + FILTER -->
+              <div class="row px-3 mb-3">
+                <div class="col-md-6">
+                  <input
+                    type="text"
+                    id="userSearch"
+                    class="form-control"
+                    placeholder="Search by name or email..."
+                    onkeyup="filterUsers()" />
+                </div>
+
+                <div class="col-md-3">
+                  <select id="statusFilter" class="form-select" onchange="filterUsers()">
+                    <option value="">All Status</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="SUSPENDED">Suspended</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="table-responsive text-nowrap">
                 <table class="table">
                   <thead>
                     <tr>
                       <th>S/N</th>
-                      <th>Fullname</th>  
+                      <th style="width:300px">Fullname</th>
                       <th>Email</th>
-                      <th>Pass</th> 
+                      <th>Pass</th>
                       <th>Available balance</th>
                       <th>Trading balance</th>
                       <th>Registered</th>
                       <th>Referred By</th>
-                      <th>Status</th> 
+                      <th>Status</th>
                       <th>Action</th>
-                      <th>Edit available balance</th> 
+                      <th>Edit available balance</th>
                       <th>Edit trading balance</th>
-                      
                     </tr>
                   </thead>
+
                   <tbody class="table-border-bottom-0">
                     <?php
-
-                    if(isset($_POST['add_available_bal'])){
-  $id = $_POST['id'];
-  $amount = $_POST['amount'];
-
-  $sql = mysqli_query($connection,"UPDATE users set wallet = wallet + '$amount' where id = '$id'");
-   if($sql){
-    echo "<script> Swal.fire('Done','You have successfully added available balance of this user','success')
-    
-    setTimeout(()=>{
-         window.open('./all.php','_self')
-     },2000)
-    
-    </script>";
-    
-   }
-}
-
-if(isset($_POST['add_trading_bal'])){
-  $id = $_POST['id'];
-  $amount = $_POST['amount'];
-
-  $sql = mysqli_query($connection,"UPDATE users set gain_wallet = gain_wallet + '$amount' where id = '$id'");
-   if($sql){
-    echo "<script> Swal.fire('Done','You have successfully added trading balance of this user','success')
-    
-     setTimeout(()=>{
-         window.open('./all.php','_self')
-     },2000)
-    
-    </script>";
-   }
-}
-
-
-
-                    if (isset($_GET['suspend'])) {
-                        $id = $_GET['user_id'];
-                        $suspend = mysqli_query($connection, "UPDATE `users` SET `active` = '1' WHERE `id` = '$id'");
-                        if ($suspend) {
-                          echo "<script> Swal.fire('Great Job','You have suspended this account','success') </script>";
-                          echo "<script> setTimeout( ()=> { window.open('suspends.php','_self') }, 2000) </script>";
-                        } else {
-                          echo "<script> Swal.fire('Failed','Error suspending this user','error') </script>"; 
-                        }
-                    }
-                    if (isset($_GET['del'])) {
-                        $id = $_GET['user_id'];
-                        $suspend = mysqli_query($connection, "DELETE FROM `users` WHERE `id` = '$id'");
-                        if ($suspend) {
-                          echo "<script> Swal.fire('Great Job','You have deleted this account','success') </script>";
-                          echo "<script>  setTimeout( ()=> { window.open('all.php','_self') }, 2000) </script>";
-                        } else {
-                          echo "<script> Swal.fire('Failed','Error suspending this user','error') </script>"; 
-                        }
-                    }
-
-                    if (isset($_GET['msg'])) {
-                      $_SESSION['msg_id'] = $_GET['user_id'];
-                      $_SESSION['msg_person'] = $_GET['name'];
-                      $_SESSION['msg_mail'] = $_GET['email'];
-                      $_SESSION['mailing'] = true;
-                      echo "<script> window.location.href = 'msg.php' </script>";
-                      
-                    }
-                    
-                    if (isset($_GET['mod'])) {
-                      $_SESSION['bal_id'] = $_GET['user_id'];
-                      $_SESSION['bal_person'] = $_GET['name'];
-                      $_SESSION['bal'] = $_GET['bal'];
-                      $_SESSION['moding'] = true;
-                      echo "<script> window.location.href = 'mod_bal.php' </script>"; 
-                    }
-                    
-                    if (isset($_GET['profit'])) {
-                      $_SESSION['profit_id'] = $_GET['user_id']; 
-                      $_SESSION['profit'] = $_GET['profit'];
-                      $_SESSION['moding'] = true;
-                      echo "<script> window.location.href = 'mod_profit.php' </script>"; 
-                    }
-                    
-                    if (isset($_GET['stop'])) {
-                      $user_top_stop_id = $_GET['user_id'];
-                      $stop_withdrawal = mysqli_query($connection, "UPDATE `users` SET `dn_with` = '1' WHERE `id` = '$user_top_stop_id' ");
-                      
-                      if ($stop_withdrawal) {
-                          echo "<script> Swal.fire('Done','This User Cant make withdrawals until enabled','success') </script>";
-                          echo "<script>  setTimeout( ()=> { window.open('all.php','_self') }, 2000) </script>";
-                      } else {
-                          echo "<script> Swal.fire('Failed','Error stoping withdrawal for this user','error') </script>"; 
-                      }
-                        
-                    }
-
-                    
                     $sql = mysqli_query($connection, "SELECT * FROM `users` WHERE `status` = '0'");
                     if (mysqli_num_rows($sql)) {
                       $count = 1;
                       while ($details = mysqli_fetch_assoc($sql)) {
-
-                        $id = $details['id'];
                     ?>
                         <tr>
                           <td><?php echo $count ?></td>
-                          <td><?php echo $details['name']?></td> 
-                          <td><?php echo $details['email']?></td>
-                          <td><?php echo $details['password']?></td> 
-                          <td>$<?php echo $details['wallet']?></td>
-                          <td>$<?php echo $details['gain_wallet']?></td>
-                          <td><?php echo $details['date_registered']?></td>
-                          <td><?php echo $details['referree']?></td>
+
+                          <!-- NAME COLUMN (FIXED WIDTH + BREAK) -->
+                          <td class="user-name">
+                            <?php echo $details['name'] ?>
+                          </td>
+
+                          <td><?php echo $details['email'] ?></td>
+                          <td><?php echo $details['password'] ?></td>
+                          <td>$<?php echo $details['wallet'] ?></td>
+                          <td>$<?php echo $details['gain_wallet'] ?></td>
+                          <td><?php echo $details['date_registered'] ?></td>
+                          <td><?php echo $details['referree'] ?></td>
+
                           <td>
                             <?php
-                              if ($details['status'] == 0) {
-                                echo "<span class=\"badge bg-label-primary me-1\">ACTIVE</span>";
-                              } else if ($details['status'] == 1) {
-                                echo "<span class=\"badge bg-label-warning me-1\">SUSPENDED</span>";
-                              } else {
-                                echo "<span class=\"badge bg-label-danger me-1\">UNDEFINED</span>";
-                              }
-                            ?>  
-                          </td> 
+                            if ($details['status'] == 0) {
+                              echo "<span class='badge bg-label-primary'>ACTIVE</span>";
+                            } else {
+                              echo "<span class='badge bg-label-warning'>SUSPENDED</span>";
+                            }
+                            ?>
+                          </td>
+
                           <td>
                             <div class="dropdown">
-                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
                               <div class="dropdown-menu">
-                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to suspend this user') " href="<?php echo $_SERVER['PHP_SELF']?>?user_id=<?php echo $details['id'] ?>&suspend"><i class="bx bx-cog me-1"></i> Suspend Account</a>
-                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this user') " href="<?php echo $_SERVER['PHP_SELF']?>?user_id=<?php echo $details['id'] ?>&del"><i class="bx bx-cog me-1"></i> Delete User</a>
-
-                                <a class="dropdown-item" href="email_user.php?user_id=<?php echo $details['id'] ?>"><i class="bx bx-cog me-1"></i>Email user</a>
-                                
-
-                                <a class="dropdown-item" href="user_details.php?user_id=<?php echo $details['id'] ?>"><i class="bx bx-cog me-1"></i>User details</a>
-                                
-                                
-                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to modify this user\' balance') " href="<?php echo $_SERVER['PHP_SELF']?>?user_id=<?php echo $details['id'] ?>&&stop"><i class="bx bx-cog me-1"></i>Disable Withdrawal</a>
+                                <a class="dropdown-item" href="?user_id=<?php echo $details['id'] ?>&suspend">Suspend</a>
+                                <a class="dropdown-item" href="?user_id=<?php echo $details['id'] ?>&del">Delete</a>
+                                <a class="dropdown-item" href="email_user.php?user_id=<?php echo $details['id'] ?>">Email</a>
+                                <a class="dropdown-item" href="user_details.php?user_id=<?php echo $details['id'] ?>">Details</a>
                               </div>
                             </div>
                           </td>
+
                           <td>
                             <form method="post">
-                              <label><?php echo $details['email'] ?></label><br>
-                              <input type="hidden" name="id" value="<?php echo $id ?>">
-                              <input type="number" name="amount" placeholder="Amount for avalaible balance*" required><br>
+                              <input type="hidden" name="id" value="<?php echo $details['id'] ?>">
+                              <input type="number" name="amount" class="form-control mb-1" placeholder="Amount" required>
                               <button class="btn btn-primary btn-sm" name="add_available_bal">Add</button>
                             </form>
                           </td>
+
                           <td>
                             <form method="post">
-                              <label><?php echo $details['email'] ?></label><br>
-                              <input type="hidden" name="id" value="<?php echo $id ?>">
-                              <input type="number" name="amount" placeholder="Amount for trading balance*" required><br>
+                              <input type="hidden" name="id" value="<?php echo $details['id'] ?>">
+                              <input type="number" name="amount" class="form-control mb-1" placeholder="Amount" required>
                               <button class="btn btn-success btn-sm" name="add_trading_bal">Add</button>
                             </form>
                           </td>
                         </tr>
-                    <?php $count++;
+                    <?php
+                        $count++;
                       }
                     } else {
-                      echo "<td class='bg-danger text-white' colspan='10'>No Users</td>";
-                    } ?>
+                      echo "<tr><td colspan='12' class='text-center bg-danger text-white'>No Users</td></tr>";
+                    }
+                    ?>
                   </tbody>
                 </table>
               </div>
             </div>
+
             <!--/ Basic Bootstrap Table -->
           </div>
           <!-- / Content -->
@@ -377,29 +408,25 @@ if(isset($_POST['add_trading_bal'])){
 
 
 
-          <!-- Footer -->
-          <!-- <footer class="content-footer footer bg-footer-theme">
-            <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-              <div class="mb-2 mb-md-0">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>
-                , made with ❤️ by <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-              </div>
-              <div>
+          <script>
+            function filterUsers() {
+              const search = document.getElementById("userSearch").value.toLowerCase();
+              const status = document.getElementById("statusFilter").value;
+              const rows = document.querySelectorAll("tbody tr");
 
-                <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+              rows.forEach(row => {
+                const name = row.children[1]?.innerText.toLowerCase() || "";
+                const email = row.children[2]?.innerText.toLowerCase() || "";
+                const userStatus = row.children[8]?.innerText.trim();
 
-                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
+                const matchSearch = name.includes(search) || email.includes(search);
+                const matchStatus = status === "" || userStatus === status;
 
-                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
+                row.style.display = matchSearch && matchStatus ? "" : "none";
+              });
+            }
+          </script>
 
-
-              </div>
-            </div>
-          </footer> -->
-          <!-- / Footer -->
           <div class="content-backdrop fade"></div>
         </div>
         <!-- Content wrapper -->
