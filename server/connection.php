@@ -22,7 +22,7 @@ define("HOST", "localhost");
 $isLocalhost = ($_SERVER['HTTP_HOST'] === 'localhost');
 
 // Database connection (Only use one based on environment)
-$connection = '';
+$connection = null;
 
 if ($isLocalhost) {
     // Offline (Localhost)
